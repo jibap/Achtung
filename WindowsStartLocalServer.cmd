@@ -1,6 +1,6 @@
 @echo off
 chcp 65001 >nul
-title Serveur local Python
+title Serveur local Python - Achtung
 
 REM === Test Python ===
 
@@ -32,5 +32,5 @@ echo ✅ Python détecté
 echo 🌐 Lancement du serveur sur http://localhost:8000
 echo.
 
-%PYTHON_CMD% -m http.server 8000
 start http://localhost:8000
+%PYTHON_CMD% -m http.server 8000
