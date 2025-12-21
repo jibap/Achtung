@@ -2,7 +2,7 @@
 
 Découvrez l'excellent jeu de "snake" en multi-joueurs ! 
 
-Fork de la version revisitée par <a href="https://github.com/BarthPaleologue/Achtung">@BarthPaleologue</a>
+Fork de la version revisitée par <a href="https://github.com/BarthPaleologue/Achtung">@BarthPaleologue</a> avec les bonus qui donnent du piment au jeu, paramétrables !
 
 ## Améliorations de ma version
 
