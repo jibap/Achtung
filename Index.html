@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Achtung</title>
+    <link rel="stylesheet" href="./styles/style.css" />
+</head>
+
+<body>
+    <section id="Startmenu">
+        <h1>Achtung<sub>v2026 by Jibap</sub></h1>
+        <div id="playerSlection">
+            <div class="player-container" id="Fred" alt="red" data-selected="false">
+                <p class="name">Souleil</p>
+                <p class="keyRight">Droite</p>
+                <p class="keyLeft">Gauche</p>
+
+            </div>
+            <div class="player-container" id="Greenlee" alt="green" data-selected="false">
+                <p class="name">Loon</p>
+                <p class="keyRight">Droite</p>
+                <p class="keyLeft">Gauche</p>
+
+            </div>
+            <div class="player-container" id="Hubert" alt="blue" data-selected="false">
+                <p class="name">JB</p>
+                <p class="keyRight">Droite</p>
+                <p class="keyLeft">Gauche</p>
+            </div>
+            <div class="player-container" id="Pinkney" alt="purple" data-selected="false">
+                <p class="name">Nolah</p>
+                <p class="keyRight">Droite</p>
+                <p class="keyLeft">Gauche</p>
+            </div>
+            <div class="player-container" id="Bluebell" alt="cyan" data-selected="false">
+                <p class="name">Pierrick</p>
+                <p class="keyRight">Droite</p>
+                <p class="keyLeft">Gauche</p>
+            </div>
+            <div class="player-container" id="Claude" alt="yellow" data-selected="false">
+                <p class="name">Naïa</p>
+                <p class="keyRight">Droite</p>
+                <p class="keyLeft">Gauche</p>
+            </div>
+            <div class="player-container" id="Greydon" alt="grey" data-selected="false">
+                <p class="name">Priscilla</p>
+                <p class="keyRight">Droite</p>
+                <p class="keyLeft">Gauche</p>
+            </div>
+            <div class="player-container" id="Brownie" alt="#964B00" data-selected="false">
+                <p class="name">Emmanuelle</p>
+                <p class="keyRight">Droite</p>
+                <p class="keyLeft">Gauche</p>
+            </div>
+            <div class="player-container" id="Willem" alt="#FFA500" data-selected="false">
+                <p class="name">Orange</p>
+                <p class="keyRight">Droite</p>
+                <p class="keyLeft">Gauche</p>
+            </div>
+            <div class="player-container" id="Philippe" alt="#07420c" data-selected="false">
+                <p class="name">Vert Foncé</p>
+                <p class="keyRight">Droite</p>
+                <p class="keyLeft">Gauche</p>
+            </div>
+            <div class="player-container" id="Deepurple" alt="blueviolet" data-selected="false">
+                <p class="name">Deepurple</p>
+                <p class="keyRight">Droite</p>
+                <p class="keyLeft">Gauche</p>
+            </div>
+            <div class="player-container" id="Pinkey" alt="deeppink" data-selected="false">
+                <p class="name">Pinkey</p>
+                <p class="keyRight">Droite</p>
+                <p class="keyLeft">Gauche</p>
+            </div>
+            <div class="player-container" id="Aquamarin" alt="aquamarine" data-selected="false">
+                <p class="name">Aquamarin</p>
+                <p class="keyRight">Droite</p>
+                <p class="keyLeft">Gauche</p>
+            </div>
+            <div class="player-container" id="Teal" alt="teal" data-selected="false">
+                <p class="name">Teal</p>
+                <p class="keyRight">Droite</p>
+                <p class="keyLeft">Gauche</p>
+            </div>
+            <div class="player-container" id="Coralia" alt="coral" data-selected="false">
+                <p class="name">Coralia</p>
+                <p class="keyRight">Droite</p>
+                <p class="keyLeft">Gauche</p>
+            </div>
+        </div>
+        <p id="Go">Achtung !</p>
+        <div id="sliders">
+            <p>Vitesse</p>
+            <div class="slider" id="speedSlider"></div>
+            <p>Maniabilité</p>
+            <div class="slider" id="maniaSlider"></div>
+            <p>Largeur</p>
+            <div class="slider" id="fatSlider"></div>
+            <p>Longueur de trou</p>
+            <div class="slider" id="trouSlider"></div>
+            <p>Puissance des bonus</p>
+            <div class="slider" id="bonusSlider"></div>
+            <p>Fréquence des bonus</p>
+            <div class="slider" id="bonusFreqSlider"></div>
+            <p>Durée des bonus</p>
+            <div class="slider" id="bonusDurationSlider"></div>
+            <br/>
+            <div class="checkboxContainer" style="display: none !important;">
+                <label for="defaultSnakeMode">Mode Snake</label>
+                <input name="defaultSnakeMode" id="defaultSnakeMode" type="checkbox">
+                <label for="defaultSnakeMode" id="defaultSnakeModeLabel"></label>
+            </div>
+            <div class="checkboxContainer">
+                <label for="objects">Autoriser Bonus</label>
+                <input name="objects" id="objects" type="checkbox" checked>
+                <label for="objects" id="objectsLabel"></label>
+            </div>
+            <div id="object-selector">
+                <img src="bonus/fasterSelf.png" id="fasterSelf" data-selected="true" />
+                <img src="bonus/fasterElse.png" id="fasterElse" data-selected="true" />
+                <img src="bonus/fatter.png" id="fatter" data-selected="true" />
+                <img src="bonus/slimmer.png" id="slimmer" data-selected="true" />
+                <img src="bonus/invincible.png" id="invincible" data-selected="true" />
+                <img src="bonus/random.png" id="random" data-selected="true" />
+                <img src="bonus/addBonus.png" id="addBonus" data-selected="true" />
+                <img src="bonus/invert.png" id="invert" data-selected="true" />
+                <img src="bonus/slowerElse.png" id="slowerElse" data-selected="true" />
+                <img src="bonus/slowerSelf.png" id="slowerSelf" data-selected="true" />
+                <img src="bonus/snakeSelf.png" id="snakeSelf" data-selected="true" />
+                <img src="bonus/snakeElse.png" id="snakeElse" data-selected="true" />
+                <img src="bonus/wallSelf.png" id="wallSelf" data-selected="true" />
+                <img src="bonus/walls.png" id="walls" data-selected="true" />
+                <img src="bonus/colorBlind.png" id="colorBlind" data-selected="true" />
+                <img src="bonus/changeBg.png" id="changeBg" data-selected="true" />
+            </div>
+            <p id="randomize">Random !</p>
+        </div>
+    </section>
+    <div id="canvas-container">
+        <div id="victoryScreen">
+            <p id="victor"></p>
+        </div>
+        <div id="bg_calc"></div>
+        <canvas id="canvas"></canvas>
+
+        <div id="score-container">
+            <h2 id="highscore"></h2>
+            <div id="score"></div>
+        </div>
+        <div id="pauseMenu">
+            <h3>Pause !</h3>
+        </div>
+    </div>
+    <script src="./components/external/seedrandom.min.js"></script>
+    <script type="module" src="./components/main.js"></script>
+</body>
+
+</html>
