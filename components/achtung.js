@@ -11,14 +11,15 @@ export class Achtung {
         this.interval = 0;
         this.running = true;
         this.gameOver = false;
-        this.defaultSnakeMode = false;
+        // this.defaultSnakeMode = false; 
         document.querySelectorAll(".bonus, .head").forEach((elm) => elm.remove());
         document.getElementById("Startmenu").hidden = true;
         document.getElementById("pauseMenu").style.opacity = "0";
         document.getElementById("canvas-container").style.display = "block";
         let ctx = canvas.getContext("2d");
-        ctx.canvas.width = 1500;
-        ctx.canvas.height = 1050; // les bordures pour le -2*3
+        console.log(document);
+        ctx.canvas.width = window.innerWidth - 450;
+        ctx.canvas.height = window.innerHeight + 150;
         ctx.globalCompositeOperation = "source-over";
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // le fond du canvas
         this.width = ctx.canvas.width;
@@ -49,7 +50,7 @@ export class Achtung {
                 this.bonusManager.addEffect(element.getAttribute("id"));
             }
         });
-        document.getElementById("score-container").style.width = "390px";
+        document.getElementById("score-container").style.width = "400px";
         // initialisation du clavier
         this.keyboard = {};
         window.addEventListener('keydown', e => this.keyboard[e.keyCode] = true);

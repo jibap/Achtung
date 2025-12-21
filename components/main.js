@@ -65,11 +65,11 @@ for (let bonusElement of document.querySelectorAll("#object-selector img")) {
     });
 }
 (_a = document.getElementById("objects")) === null || _a === void 0 ? void 0 : _a.addEventListener("change", () => {
-    if (document.getElementById("object-selector").style.height == "0px") {
-        document.getElementById("object-selector").style.height = "200px";
+    if (document.getElementById("object-selector").classList.contains("disabled")) {
+        document.getElementById("object-selector").classList.remove("disabled");
     }
     else
-        document.getElementById("object-selector").style.height = "0px";
+        document.getElementById("object-selector").classList.add("disabled");
 });
 let modifiers = {
     speed: 1,
@@ -120,7 +120,7 @@ document.getElementById("randomize").addEventListener("click", () => {
     }
     let areBonusEnabled = document.getElementById("objects").checked;
     if ((randomBool(5) && areBonusEnabled) || (randomBool(80) && !areBonusEnabled))
-        document.getElementById("objects").checked = !areBonusEnabled;
+        document.getElementById("objects").click();
 });
 document.getElementById("Go").addEventListener("click", () => {
     if (document.querySelectorAll(".selected").length > 1) {
