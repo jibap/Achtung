@@ -122,6 +122,21 @@ document.getElementById("randomize").addEventListener("click", () => {
     if ((randomBool(5) && areBonusEnabled) || (randomBool(80) && !areBonusEnabled))
         document.getElementById("objects").click();
 });
+document.getElementById("reset").addEventListener("click", () => {
+    speedSlider.setValue(10);
+    maniaSlider.setValue(10);
+    fatSlider.setValue(10);
+    trouSlider.setValue(10);
+    bonusSlider.setValue(10);
+    bonusFreqSlider.setValue(10);
+    bonusDurationSlider.setValue(10);
+    for (let bonusElement of document.querySelectorAll("#object-selector img")) {
+        bonusElement.classList.remove("disabled");
+    }
+    let areBonusEnabled = document.getElementById("objects").checked;
+    if (!areBonusEnabled)
+        document.getElementById("objects").click();
+});
 document.getElementById("Go").addEventListener("click", () => {
     if (document.querySelectorAll(".selected").length > 1) {
         try {

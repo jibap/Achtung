@@ -18,8 +18,8 @@ export class Achtung {
         document.getElementById("canvas-container").style.display = "block";
         let ctx = canvas.getContext("2d");
         console.log(document);
-        ctx.canvas.width = window.innerWidth - 450;
-        ctx.canvas.height = window.innerHeight + 150;
+        ctx.canvas.width = screen.width - 450;
+        ctx.canvas.height = screen.height - 20;
         ctx.globalCompositeOperation = "source-over";
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // le fond du canvas
         this.width = ctx.canvas.width;

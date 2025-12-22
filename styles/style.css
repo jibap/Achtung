@@ -18,7 +18,8 @@ body {
     width: 100%;
     z-index: 10;
     background: black;
-    user-select: none
+    user-select: none;
+    color: white;
 }
 
 #Startmenu {
@@ -28,7 +29,6 @@ body {
 
 #Startmenu h1 {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: white;
     height: 80px;
     font-size: 3em;
     text-shadow: 1px 0px 3px red;
@@ -51,18 +51,18 @@ body {
     justify-content: space-evenly;
     overflow: hidden;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 #Startmenu > div > *{
     overflow: auto;
-    min-width: 30vw;
+    width: 30%;
 }
 
 
 #playerSlection {
     height: calc(100vh - 100px);
-    align-self: top;
-    color: white;
+    align-self: flex-start;
     font-family: Verdana, sans-serif;
 }
 
@@ -158,32 +158,92 @@ body {
     background: rgba(255,127,80,0.8)
 }
 
-#Go {
-    height: 260px!important;
-    min-width: 260px!important;
-    color: white;
+#Go{
+    display: flex;
+    justify-content: center;
+}
+
+#Go > div {
+    height: 15vw !important;
+    width: 15vw !important;
     background: black;
     border: 5px solid cyan;
     margin: 0;
-    font-size: 3.7em;
+    font-size: 3vw;
     cursor: pointer;
     border-radius: 100%;
     font-family: sans-serif;
     text-align: center;
-    line-height: 250px;
+    line-height: 15vw;
+    overflow: hidden !important;
 }
 
-#Go:hover {
+#Go > div:hover {
     background-color: midnightblue;
 }
 
+#Go span{
+    position: absolute;
+    margin-left: -11vw;
+    font-size: 14vw;
+    opacity: 0.2;
+}
+
+@media (max-width: 1400px) {
+    #Startmenu > div > *:not(#Go){
+        width: 40%;
+    }
+    #Go{
+        width: 20%!important;
+    }
+}
+
+@media (max-width: 1000px) {
+    #Startmenu > div > *:not(#Go){
+        width: 50%;
+    }
+    #Go{
+        width: 100%!important;
+        padding: 20px;
+        border-top: 1px solid white;
+    }
+}
 
 #settings{
     width: 300px;
+    height: calc(100vh - 100px);
+}
+
+#buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#buttons p {
+    background: orange;
+    border-radius: 3px;
+    text-align: center;
+    padding: 10px 20px;
+    margin: 10px 0;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: max(1vw, 12px);
+    width: 35%;
+}
+
+#buttons p:hover {
+    background: red;
+}
+
+#reset{
+    background:  red!important;
+}
+#reset:hover{
+    background:  orange!important;
 }
 
 #sliders p {
-    color: white;
     font-family: sans-serif;
     display: inline-block;
     width: 200px;
@@ -205,9 +265,8 @@ body {
     grid-template-columns: auto 50px;
     background: purple;
     border-radius: 3px;
-    width: 50%;
+    width: 24vw;
     z-index: 2;
-    color: white;
 }
 
 #bonus .checkboxContainer:hover {
@@ -290,21 +349,6 @@ body {
     opacity: .3;
 }
 
-#randomize {
-    background: orange;
-    border-radius: 3px;
-    text-align: center;
-    padding: 10px 20px;
-    margin: 10px 0;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1.5em;
-}
-
-#randomize:hover {
-    background: yellow;
-}
-
 #canvas-container {
     position: relative;
     display: none
@@ -320,7 +364,6 @@ body {
 
 #score-container {
     padding: 5px 10px;
-    color: white;
     width: 200px;
     float: right;
     font-family: sans-serif;
@@ -406,7 +449,6 @@ body {
 
 #victor {
     text-align: center;
-    color: white;
     font-family: sans-serif;
     font-size: 400%;
     -webkit-margin-before: 0;
@@ -448,7 +490,6 @@ body {
 
 #pauseMenu h3 {
     text-align: center;
-    color: white;
     font-family: sans-serif;
     margin-top: 30%;
     font-size: 200%
