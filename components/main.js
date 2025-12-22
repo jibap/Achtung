@@ -8,22 +8,70 @@ import { randomBool, getRandomInt } from "./external/tools.js";
 let achtung;
 let settingState = 0;
 let selectedContainer;
-// actions de la souris sur la sélection des joueurs
-for (let playerContainer of document.querySelectorAll(".player-container")) {
-    playerContainer.addEventListener("click", () => {
-        selectedContainer = playerContainer;
-        settingState = 0;
+let editingName = false;
+
+document.querySelectorAll('.player-container').forEach(playerLine => {
+    let clickTimer;
+
+    playerLine.addEventListener("click", () => {
+       // on attend 250ms pour confirmer que ce n'est pas un double-clic
+        clickTimer = setTimeout(() => {
+        if (!editingName) { // optionnel : ne rien faire si on édite
+            selectedContainer = playerLine;
+            settingState = 0;
+        }
+        }, 250);
     });
-    playerContainer.addEventListener("contextmenu", e => {
+
+    playerLine.addEventListener("contextmenu", e => {
         e.preventDefault();
-        playerContainer.setAttribute("data-selected", "false");
-        playerContainer.classList.remove("selected");
-        playerContainer.querySelector(".keyRight").innerHTML = "Droite";
-        playerContainer.querySelector(".keyLeft").innerHTML = "Gauche";
+        playerLine.setAttribute("data-selected", "false");
+        playerLine.classList.remove("selected");
+        playerLine.querySelector(".keyRight").innerHTML = "Droite";
+        playerLine.querySelector(".keyLeft").innerHTML = "Gauche";
     });
-}
+
+    playerLine.addEventListener('dblclick', () => {
+        clearTimeout(clickTimer); // annule le clic simple
+        editingName = true; // on commence l’édition
+        const pElem = playerLine.querySelector('.name');
+        const currentName = pElem.textContent;
+
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.value = '';
+
+        pElem.replaceWith(input);
+        input.focus();
+
+        let finalized = false;  // Flag pour éviter le blur après enter
+        const finalize = (escape) => {
+            if (finalized) return; // déjà fait, on sort
+            finalized = true;
+            const newName = escape ? currentName : (input.value.trim() || currentName);
+            const newP = document.createElement('p');
+            newP.className = 'name';
+            newP.textContent = newName;
+            input.replaceWith(newP);
+            editingName = false; // fin de l’édition
+        };
+
+        input.addEventListener('blur', () => finalize(false));
+        input.addEventListener('keydown', e => {
+            if (e.key === 'Enter') {
+                e.preventDefault();    // empêche l’action par défaut du navigateur
+                e.stopPropagation();   // empêche la propagation vers le listener d'apui de touche
+                finalize(false);
+            } else if (e.key === 'Escape') {
+                e.preventDefault();
+                e.stopPropagation();
+                finalize(true); // remet l'ancien nom
+            }
+        });
+    });
+});
 document.addEventListener("keydown", e => {
-    if (selectedContainer != undefined) {
+    if (selectedContainer != undefined && !editingName) {
         if (settingState == 0) {
             selectedContainer.querySelector(".keyLeft").innerHTML = e.key;
             selectedContainer.querySelector(".keyLeft").setAttribute("alt", String(e.keyCode));
