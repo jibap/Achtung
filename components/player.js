@@ -2,8 +2,8 @@ import { getRandom, squaredDistance } from "./external/tools.js";
 import { Cell } from "./cell.js";
 import { playerBaseSpeed, playerBaseWidth, borderWidth } from "./constants.js";
 export class Player {
-    constructor(id, name, x, y, initialVector, color, keyLeft, keyRight, playerManager) {
-        this.id = id;
+    constructor(fullName, name, x, y, initialVector, color, keyLeft, keyRight, playerManager) {
+        this.fullName = fullName;
         this.rightFired = false;
         this.leftFired = false;
         this.alive = true;

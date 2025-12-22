@@ -39,7 +39,7 @@ export class PlayerManager {
         for (let player of this.players) {
             let scoreElement = document.createElement("p");
             scoreElement.setAttribute("id", player.name + "Score");
-            scoreElement.innerText = `${player.id} : ${player.score}`;
+            scoreElement.innerText = `${player.fullName} : ${player.score}`;
             (_a = document.getElementById("score")) === null || _a === void 0 ? void 0 : _a.appendChild(scoreElement);
         }
         if (this.players[0].score >= this.maxScore && this.players[0].score - this.players[1].score >= 2 && this.aliveCounter <= 1) {

@@ -20,6 +20,7 @@ body {
     background: black;
     user-select: none;
     color: white;
+    font-family: sans-serif;
 }
 
 #Startmenu {
@@ -28,7 +29,6 @@ body {
 }
 
 #Startmenu h1 {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     height: 80px;
     font-size: 3em;
     text-shadow: 1px 0px 3px red;
@@ -172,7 +172,6 @@ body {
     font-size: 3vw;
     cursor: pointer;
     border-radius: 100%;
-    font-family: sans-serif;
     text-align: center;
     line-height: 15vw;
     overflow: hidden !important;
@@ -244,7 +243,6 @@ body {
 }
 
 #sliders p {
-    font-family: sans-serif;
     display: inline-block;
     width: 200px;
     text-align: right;
@@ -274,7 +272,6 @@ body {
 }
 
 #bonus .checkboxContainer label:first-of-type {
-    font-family: sans-serif;
     line-height: 50px;
     padding-left: 20px;
     cursor: pointer
@@ -364,10 +361,8 @@ body {
 
 #score-container {
     padding: 5px 10px;
-    width: 200px;
+    font-size: 2vw;
     float: right;
-    font-family: sans-serif;
-    font-size: 200%
 }
 
 #highscore {
@@ -449,7 +444,6 @@ body {
 
 #victor {
     text-align: center;
-    font-family: sans-serif;
     font-size: 400%;
     -webkit-margin-before: 0;
     margin-block-start:0;-webkit-text-stroke: midnightblue 1px
@@ -490,7 +484,6 @@ body {
 
 #pauseMenu h3 {
     text-align: center;
-    font-family: sans-serif;
     margin-top: 30%;
     font-size: 200%
 }
@@ -695,6 +688,5 @@ body {
     left: 25px;
     pointer-events: none;
     line-height: 30px;
-    font-family: sans-serif;
     color: black
 }

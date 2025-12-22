@@ -150,5 +150,5 @@ document.getElementById("Go").addEventListener("click", () => {
         }
     }
     else
-        alert("Bah alors ? Tu joues tout seul ? T'as pas d'amis Jack !");
+        alert("Il faut quand même 2 joueurs...");
 });

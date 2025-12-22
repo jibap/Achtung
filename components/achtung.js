@@ -11,22 +11,13 @@ export class Achtung {
         this.interval = 0;
         this.running = true;
         this.gameOver = false;
+        this.modifiers = modifiers;
         // this.defaultSnakeMode = false; 
         document.querySelectorAll(".bonus, .head").forEach((elm) => elm.remove());
         document.getElementById("Startmenu").hidden = true;
         document.getElementById("pauseMenu").style.opacity = "0";
         document.getElementById("canvas-container").style.display = "block";
         let ctx = canvas.getContext("2d");
-        console.log(document);
-        ctx.canvas.width = screen.width - 450;
-        ctx.canvas.height = screen.height - 20;
-        ctx.globalCompositeOperation = "source-over";
-        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // le fond du canvas
-        this.width = ctx.canvas.width;
-        this.height = ctx.canvas.height;
-        this.modifiers = modifiers;
-        document.getElementById("bg_calc").style.width = this.width + "px";
-        document.getElementById("bg_calc").style.height = this.height + "px";
         // initialisation des subdivisions du jeu
         this.canvasManager = new CanvasManager(canvas, this);
         this.canvasManager.initCells(20);
@@ -37,20 +28,27 @@ export class Achtung {
                 let keyLeft = parseInt(element.querySelector(".keyLeft").getAttribute("alt"));
                 let keyRight = parseInt(element.querySelector(".keyRight").getAttribute("alt"));
                 let color = element.getAttribute("alt");
-                let id = element.querySelector(".name").innerHTML;
+                let fullName = element.querySelector(".name").innerHTML;
                 let name = element.getAttribute("id");
-                this.playerManager.addPlayer(new Player(id, name, getRandom(this.width / 7, this.width * (6 / 7)), getRandom(this.height / 7, this.height * (6 / 7)), Math.random() * 360, color, keyLeft, keyRight, this.playerManager));
-                // console.log(`${name} has been added to the game.`);
-                document.getElementById("score").append(`<p id="${name}Score">${name} : 0</p>`);
+                this.playerManager.addPlayer(new Player(fullName, name, getRandom(this.width / 7, this.width * (6 / 7)), getRandom(this.height / 7, this.height * (6 / 7)), Math.random() * 360, color, keyLeft, keyRight, this.playerManager));
+                document.getElementById("score").insertAdjacentHTML("beforeend",`<p id="${name}Score">${fullName} : 0</p>`);
             }
         });
+        let scoreWidth = document.getElementById("score-container").clientWidth;
+        ctx.canvas.width = screen.width - scoreWidth - 20;
+        ctx.canvas.height = screen.height - 20;
+        ctx.globalCompositeOperation = "source-over";
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // le fond du canvas
+        this.width = ctx.canvas.width;
+        this.height = ctx.canvas.height;
+        document.getElementById("bg_calc").style.width = this.width + "px";
+        document.getElementById("bg_calc").style.height = this.height + "px";
         this.bonusManager = new BonusManager(this);
         document.querySelectorAll("#object-selector img").forEach((element) => {
             if (element.getAttribute("data-selected") == "true" && document.getElementById("objects").checked) {
                 this.bonusManager.addEffect(element.getAttribute("id"));
             }
         });
-        document.getElementById("score-container").style.width = "400px";
         // initialisation du clavier
         this.keyboard = {};
         window.addEventListener('keydown', e => this.keyboard[e.keyCode] = true);
