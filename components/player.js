@@ -26,8 +26,8 @@ export class Player {
         this.keyRight = keyRight;
         this.iniKeyLeft = keyLeft;
         this.iniKeyRight = keyRight;
-        this.width = playerBaseWidth * this.playerManager.modifiers.fatness;
-        this.speed = playerBaseSpeed * this.playerManager.modifiers.speed;
+        this.width = playerBaseWidth * this.playerManager.settings.fatness;
+        this.speed = playerBaseSpeed * this.playerManager.settings.speed;
         this.currentCell = new Cell(0, 0); // placeholder
         this.head = document.createElement("div");
         this.head.setAttribute("class", "head");
@@ -46,8 +46,8 @@ export class Player {
         this.color = this.defaultColor;
         this.keyLeft = this.iniKeyLeft;
         this.keyRight = this.iniKeyRight;
-        this.width = playerBaseWidth * this.playerManager.modifiers.fatness;
-        this.speed = playerBaseSpeed * this.playerManager.modifiers.speed;
+        this.width = playerBaseWidth * this.playerManager.settings.fatness;
+        this.speed = playerBaseSpeed * this.playerManager.settings.speed;
         this.alive = true;
         this.invincible = false;
         this.snakeMode = false;

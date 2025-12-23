@@ -16,9 +16,12 @@ document.querySelectorAll('.player-container').forEach(playerLine => {
     playerLine.addEventListener("click", () => {
        // on attend 250ms pour confirmer que ce n'est pas un double-clic
         clickTimer = setTimeout(() => {
-        if (!editingName) { // optionnel : ne rien faire si on édite
+        if (!editingName) {
+            document.querySelectorAll('.keyLeft, .keyRight').forEach(k => k.classList.remove('focused'));
             selectedContainer = playerLine;
             settingState = 0;
+            playerLine.querySelector(".keyLeft").classList.add("focused");
+            playerLine.querySelector(".keyRight").classList.remove("focused");
         }
         }, 250);
     });
@@ -68,40 +71,46 @@ document.querySelectorAll('.player-container').forEach(playerLine => {
                 finalize(true); // remet l'ancien nom
             }
         });
-    });
+    }); 
 });
+
 document.addEventListener("keydown", e => {
     if (selectedContainer != undefined && !editingName) {
         if (settingState == 0) {
             selectedContainer.querySelector(".keyLeft").innerHTML = e.key;
-            selectedContainer.querySelector(".keyLeft").setAttribute("alt", String(e.keyCode));
+            selectedContainer.querySelector(".keyLeft").setAttribute("alt", String(e.code));
+            selectedContainer.querySelector(".keyLeft").classList.remove('focused');
+            selectedContainer.querySelector(".keyRight").classList.add('focused');
         }
         if (settingState == 1) {
             selectedContainer.querySelector(".keyRight").innerHTML = e.key;
-            selectedContainer.querySelector(".keyRight").setAttribute("alt", String(e.keyCode));
+            selectedContainer.querySelector(".keyRight").setAttribute("alt", String(e.code));
             selectedContainer.setAttribute("data-selected", "true");
             selectedContainer.classList.add("selected");
+            selectedContainer.querySelector(".keyLeft").classList.add('focused');
+            selectedContainer.querySelector(".keyRight").classList.remove('focused');
         }
         if (settingState >= 1)
             settingState = 0;
         else
             settingState += 1;
     }
-    if (e.keyCode == 27) { // esc
-        document.getElementById("canvas-container").style.display = "none";
-        document.getElementById("Startmenu").style.display = "block";
-        if (achtung != undefined)
-            achtung === null || achtung === void 0 ? void 0 : achtung.destroy();
+    if (e.key === "Escape") { // esc
+        return2StartMenu();
     }
 });
 document.addEventListener("fullscreenchange", () => {
-    if (!document.fullscreen) {
-        document.getElementById("canvas-container").style.display = "none";
+    if (!document.fullscreenElement) {
+        return2StartMenu();
+    }
+});
+
+function return2StartMenu(){
+    document.getElementById("canvas-container").style.display = "none";
         document.getElementById("Startmenu").style.display = "block";
         if (achtung != undefined)
             achtung === null || achtung === void 0 ? void 0 : achtung.destroy();
-    }
-});
+} 
 // actions de la souris sur les bonus
 for (let bonusElement of document.querySelectorAll("#object-selector img")) {
     bonusElement.addEventListener("click", () => {
@@ -119,7 +128,7 @@ for (let bonusElement of document.querySelectorAll("#object-selector img")) {
     else
         document.getElementById("object-selector").classList.add("disabled");
 });
-let modifiers = {
+let settings = {
     speed: 1,
     maniability: 1,
     fatness: 1,
@@ -129,26 +138,27 @@ let modifiers = {
     bonusDuration: 1
 };
 let speedSlider = new Slider("speedSlider", document.getElementById("speedSlider"), 1, 50, 10, (val) => {
-    modifiers.speed = val / 10;
+    settings.speed = val / 10;
 });
 let maniaSlider = new Slider("maniaSlider", document.getElementById("maniaSlider"), 1, 20, 10, (val) => {
-    modifiers.maniability = val / 10;
+    settings.maniability = val / 10;
 });
 let fatSlider = new Slider("fatSlider", document.getElementById("fatSlider"), 1, 50, 10, (val) => {
-    modifiers.fatness = val / 10;
+    settings.fatness = val / 10;
 });
 let trouSlider = new Slider("trouSlider", document.getElementById("trouSlider"), 0, 100, 10, (val) => {
-    modifiers.holeLength = val / 10;
+    settings.holeLength = val / 10;
 });
 let bonusSlider = new Slider("bonusSlider", document.getElementById("bonusSlider"), 1, 20, 10, (val) => {
-    modifiers.bonusEffects = val / 10;
+    settings.bonusEffects = val / 10;
 });
 let bonusFreqSlider = new Slider("bonusFreqSlider", document.getElementById("bonusFreqSlider"), 1, 60, 10, (val) => {
-    modifiers.bonusFrequency = val / 10;
+    settings.bonusFrequency = val / 10;
 });
 let bonusDurationSlider = new Slider("bonusDurationSlider", document.getElementById("bonusDurationSlider"), 1, 20, 10, (val) => {
-    modifiers.bonusDuration = val / 10;
+    settings.bonusDuration = val / 10;
 });
+
 document.getElementById("randomize").addEventListener("click", () => {
     speedSlider.setValue(getRandomInt(5, 15));
     maniaSlider.setValue(getRandomInt(7, 15));
@@ -189,7 +199,7 @@ document.getElementById("Go").addEventListener("click", () => {
     if (document.querySelectorAll(".selected").length > 1) {
         try {
             document.getElementById("canvas-container").requestFullscreen().then(() => {
-                achtung = new Achtung(modifiers, document.getElementById("canvas"));
+                achtung = new Achtung(settings, document.getElementById("canvas"));
                 selectedContainer = undefined;
             });
         }

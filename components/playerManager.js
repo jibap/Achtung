@@ -6,13 +6,13 @@ export class PlayerManager {
         this.aliveCounter = 0;
         this.maxScore = 0;
         this.game = game;
-        this.modifiers = {
-            speed: game.modifiers.speed,
-            maniability: game.modifiers.maniability,
-            fatness: game.modifiers.fatness,
-            holeLength: game.modifiers.holeLength
+        this.settings = {
+            speed: game.settings.speed,
+            maniability: game.settings.maniability,
+            fatness: game.settings.fatness,
+            holeLength: game.settings.holeLength
         };
-        this.maniability = 360 * playerBaseManiability * this.modifiers.maniability * this.modifiers.speed;
+        this.maniability = 360 * playerBaseManiability * this.settings.maniability * this.settings.speed;
         this.canvasManager = this.game.canvasManager;
     }
     addPlayer(player) {
@@ -67,8 +67,8 @@ export class PlayerManager {
             if (player.alive) {
                 this.aliveCounter += 1;
                 // apparition d'un trou
-                if (randomBool(.5 * player.lastTrou / (70 / this.modifiers.speed)) && player.lastTrou > 70 / this.modifiers.speed) {
-                    player.trou += Math.max(Math.round(19 * this.modifiers.holeLength * (player.width / 3) / player.speed), Math.round(18 * this.modifiers.holeLength * (playerBaseWidth * this.modifiers.fatness / 3) / player.speed));
+                if (randomBool(.5 * player.lastTrou / (70 / this.settings.speed)) && player.lastTrou > 70 / this.settings.speed) {
+                    player.trou += Math.max(Math.round(19 * this.settings.holeLength * (player.width / 3) / player.speed), Math.round(18 * this.settings.holeLength * (playerBaseWidth * this.settings.fatness / 3) / player.speed));
                     player.invincible = true;
                     player.lastTrou = 0;
                 }

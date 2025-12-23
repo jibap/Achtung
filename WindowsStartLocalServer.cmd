@@ -29,8 +29,11 @@ if "%PYTHON_CMD%"=="" (
 
 REM === Lancement du serveur ===
 echo ✅ Python détecté
+timeout /t 1 /nobreak  >nul
 echo 🌐 Lancement du serveur sur http://localhost:8000
-echo.
+timeout /t 1 /nobreak  >nul
+echo 🌐 Ouverture de "Achtung" dans le navigateur
+timeout /t 2 /nobreak  >nul
 
 start http://localhost:8000
 %PYTHON_CMD% -m http.server 8000

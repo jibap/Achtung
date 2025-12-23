@@ -96,6 +96,11 @@ body {
     border-radius: 5px;
     padding: 5px 10px;
 }
+#playerList .player-container .focused {
+    border: 1px dashed blue;
+    background-color: white;
+    color: blue;
+}
 
 #playerList .player-container.selected {
     opacity: .8 !important;

@@ -21,7 +21,7 @@ export class BonusManager {
             }
         }
         if (!permanent) {
-            this.timeouts.push(setTimeout(() => this.affectSpeed(1 / factor, target, playerEffector, true), 10000 * this.game.modifiers.bonusDuration));
+            this.timeouts.push(setTimeout(() => this.affectSpeed(1 / factor, target, playerEffector, true), 10000 * this.game.settings.bonusDuration));
         }
     }
     affectSize(factor, target, playerEffector, permanent) {
@@ -34,7 +34,7 @@ export class BonusManager {
             }
         }
         if (!permanent) {
-            this.timeouts.push(setTimeout(() => this.affectSize(1 / factor, target, playerEffector, true), 10000 * this.game.modifiers.bonusDuration));
+            this.timeouts.push(setTimeout(() => this.affectSize(1 / factor, target, playerEffector, true), 10000 * this.game.settings.bonusDuration));
         }
     }
     permuteKeys(playerEffector, permanent) {
@@ -47,7 +47,7 @@ export class BonusManager {
             document.getElementById(`${player.name}Head`).classList.toggle("permuted");
         }
         if (!permanent) {
-            this.timeouts.push(setTimeout(() => this.permuteKeys(playerEffector, true), 10000 * this.game.modifiers.bonusDuration));
+            this.timeouts.push(setTimeout(() => this.permuteKeys(playerEffector, true), 10000 * this.game.settings.bonusDuration));
         }
     }
     affectColor(color, playerEffector, permanent) {
@@ -62,7 +62,7 @@ export class BonusManager {
                 player.color = "grey";
         }
         if (!permanent) {
-            this.timeouts.push(setTimeout(() => this.affectColor("origin", playerEffector, true), 10000 * this.game.modifiers.bonusDuration));
+            this.timeouts.push(setTimeout(() => this.affectColor("origin", playerEffector, true), 10000 * this.game.settings.bonusDuration));
         }
     }
     snakeMode(enable, target, playerEffector, permanent) {
@@ -79,15 +79,15 @@ export class BonusManager {
             }
         }
         if (!permanent) {
-            this.timeouts.push(setTimeout(() => this.snakeMode(!enable, target, playerEffector, true), 10000 * this.game.modifiers.bonusDuration));
+            this.timeouts.push(setTimeout(() => this.snakeMode(!enable, target, playerEffector, true), 10000 * this.game.settings.bonusDuration));
         }
     }
     toggleInvincibility(playerEffector, enable, permanent) {
         playerEffector.invincible = enable;
         if (enable)
-            playerEffector.trou += 60 * 7 * this.game.modifiers.bonusDuration;
+            playerEffector.trou += 60 * 7 * this.game.settings.bonusDuration;
         if (!permanent) {
-            this.timeouts.push(setTimeout(() => this.toggleInvincibility(playerEffector, !enable, true), 7000 * this.game.modifiers.bonusDuration));
+            this.timeouts.push(setTimeout(() => this.toggleInvincibility(playerEffector, !enable, true), 7000 * this.game.settings.bonusDuration));
         }
     }
     toggleWalls(breaking, permanent) {
@@ -96,7 +96,7 @@ export class BonusManager {
             player.wallBreaker = breaking;
         }
         if (!permanent) {
-            this.timeouts.push(setTimeout(() => this.toggleWalls(!breaking, true), 10000 * this.game.modifiers.bonusDuration));
+            this.timeouts.push(setTimeout(() => this.toggleWalls(!breaking, true), 10000 * this.game.settings.bonusDuration));
         }
     }
     breakWall(playerEffector, breaking, permanent) {
@@ -104,7 +104,7 @@ export class BonusManager {
         (_a = document.getElementById(`${playerEffector.name}Head`)) === null || _a === void 0 ? void 0 : _a.classList.toggle("pulseHead", breaking);
         playerEffector.wallBreaker = breaking;
         if (!permanent) {
-            this.timeouts.push(setTimeout(() => this.breakWall(playerEffector, !breaking, true), 10000 * this.game.modifiers.bonusDuration));
+            this.timeouts.push(setTimeout(() => this.breakWall(playerEffector, !breaking, true), 10000 * this.game.settings.bonusDuration));
         }
     }
     affectBgColor(color, playerEffector, permanent) {
@@ -113,23 +113,23 @@ export class BonusManager {
         if (color == "original")
             document.getElementById("bg_calc").style.display = "black";
         if (!permanent) {
-            this.timeouts.push(setTimeout(() => this.affectBgColor("original", playerEffector, true), 10000 * this.game.modifiers.bonusDuration));
+            this.timeouts.push(setTimeout(() => this.affectBgColor("original", playerEffector, true), 10000 * this.game.settings.bonusDuration));
         }
     }
     randomEffect(playerEffector, permanent) {
         let effect = this.effects[getRandomInt(0, this.effects.length - 1)];
         if (effect == "fasterSelf")
-            this.affectSpeed(2 * this.game.modifiers.bonusEffects, "self", playerEffector, permanent);
+            this.affectSpeed(2 * this.game.settings.bonusEffects, "self", playerEffector, permanent);
         else if (effect == "fasterElse")
-            this.affectSpeed(2 / this.game.modifiers.bonusEffects, "everyoneElse", playerEffector, permanent);
+            this.affectSpeed(2 / this.game.settings.bonusEffects, "everyoneElse", playerEffector, permanent);
         else if (effect == "slowerSelf")
-            this.affectSpeed(0.5 / this.game.modifiers.bonusEffects, "self", playerEffector, permanent);
+            this.affectSpeed(0.5 / this.game.settings.bonusEffects, "self", playerEffector, permanent);
         else if (effect == "slowerElse")
-            this.affectSpeed(0.5 / this.game.modifiers.bonusEffects, "everyoneElse", playerEffector, permanent);
+            this.affectSpeed(0.5 / this.game.settings.bonusEffects, "everyoneElse", playerEffector, permanent);
         else if (effect == "fatter")
-            this.affectSize(2 * this.game.modifiers.bonusEffects, "everyoneElse", playerEffector, permanent);
+            this.affectSize(2 * this.game.settings.bonusEffects, "everyoneElse", playerEffector, permanent);
         else if (effect == "slimmer")
-            this.affectSize(0.5 / this.game.modifiers.bonusEffects, "self", playerEffector, permanent);
+            this.affectSize(0.5 / this.game.settings.bonusEffects, "self", playerEffector, permanent);
         else if (effect == "invert")
             this.permuteKeys(playerEffector, permanent);
         else if (effect == "colorBlind" && randomBool(.5))
@@ -157,17 +157,17 @@ export class BonusManager {
         for (let i = 0; i < n; i++) {
             let effect = this.effects[getRandomInt(0, this.effects.length - 1)];
             if (effect == "fasterSelf")
-                new Bonus(effect, this, 2 * this.game.modifiers.bonusEffects);
+                new Bonus(effect, this, 2 * this.game.settings.bonusEffects);
             else if (effect == "fasterElse")
-                new Bonus(effect, this, 2 * this.game.modifiers.bonusEffects);
+                new Bonus(effect, this, 2 * this.game.settings.bonusEffects);
             else if (effect == "slowerSelf")
-                new Bonus(effect, this, .5 / this.game.modifiers.bonusEffects);
+                new Bonus(effect, this, .5 / this.game.settings.bonusEffects);
             else if (effect == "slowerElse")
-                new Bonus(effect, this, .5 / this.game.modifiers.bonusEffects);
+                new Bonus(effect, this, .5 / this.game.settings.bonusEffects);
             else if (effect == "fatter")
-                new Bonus(effect, this, 2 * this.game.modifiers.bonusEffects);
+                new Bonus(effect, this, 2 * this.game.settings.bonusEffects);
             else if (effect == "slimmer")
-                new Bonus(effect, this, .5 / this.game.modifiers.bonusEffects);
+                new Bonus(effect, this, .5 / this.game.settings.bonusEffects);
             else if (effect == "invert")
                 new Bonus(effect, this);
             else if (effect == "colorBlind" && randomBool(.5))

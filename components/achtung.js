@@ -5,13 +5,13 @@ import { PlayerManager } from "./playerManager.js";
 import { CanvasManager } from "./canvasManager.js";
 import { bonusBaseIterationFrequency } from "./constants.js";
 export class Achtung {
-    constructor(modifiers, canvas) {
+    constructor(settings, canvas) {
         this.fps = 60;
         this.I = 0;
         this.interval = 0;
         this.running = true;
         this.gameOver = false;
-        this.modifiers = modifiers;
+        this.settings = settings;
         // this.defaultSnakeMode = false; 
         document.querySelectorAll(".bonus, .head").forEach((elm) => elm.remove());
         document.getElementById("Startmenu").hidden = true;
@@ -25,8 +25,8 @@ export class Achtung {
         this.playerManager = new PlayerManager(this);
         document.querySelectorAll(".player-container").forEach((element) => {
             if (element.getAttribute("data-selected") == "true") {
-                let keyLeft = parseInt(element.querySelector(".keyLeft").getAttribute("alt"));
-                let keyRight = parseInt(element.querySelector(".keyRight").getAttribute("alt"));
+                let keyLeft = element.querySelector(".keyLeft").getAttribute("alt");
+                let keyRight = element.querySelector(".keyRight").getAttribute("alt");
                 let color = element.getAttribute("alt");
                 let fullName = element.querySelector(".name").innerHTML;
                 let name = element.getAttribute("id");
@@ -51,12 +51,12 @@ export class Achtung {
         });
         // initialisation du clavier
         this.keyboard = {};
-        window.addEventListener('keydown', e => this.keyboard[e.keyCode] = true);
-        window.addEventListener('keyup', e => this.keyboard[e.keyCode] = false);
+        window.addEventListener('keydown', e => this.keyboard[e.code] = true);
+        window.addEventListener('keyup', e => this.keyboard[e.code] = false);
         document.onkeyup = e => {
-            if (e.keyCode == 32 && this.running)
+            if (e.code == "Space" && this.running)
                 this.pause(), document.getElementById("pauseMenu").style.opacity = "1";
-            else if (e.keyCode == 32 && !this.running)
+            else if (e.code == "Space" && !this.running)
                 this.resume(), document.getElementById("pauseMenu").style.opacity = "0";
         };
         this.nextPlay();
@@ -83,7 +83,7 @@ export class Achtung {
         this.I += 1;
         this.playerManager.refreshScore();
         this.playerManager.aliveCounter = 0;
-        if (this.I % Math.round(bonusBaseIterationFrequency / this.modifiers.bonusFrequency) == 0 && document.getElementById("objects").checked)
+        if (this.I % Math.round(bonusBaseIterationFrequency / this.settings.bonusFrequency) == 0 && document.getElementById("objects").checked)
             this.bonusManager.spawnBonus(1);
         this.playerManager.updatePlayers();
         if (this.playerManager.aliveCounter <= 1) { // fin de la manche
