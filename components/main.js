@@ -17,6 +17,7 @@ document.querySelectorAll('.player-container').forEach(playerLine => {
        // on attend 250ms pour confirmer que ce n'est pas un double-clic
         clickTimer = setTimeout(() => {
         if (!editingName) {
+            document.getElementById("error").style.opacity = 0;
             document.querySelectorAll('.keyLeft, .keyRight').forEach(k => k.classList.remove('focused'));
             selectedContainer = playerLine;
             settingState = 0;
@@ -215,5 +216,5 @@ document.getElementById("Go").addEventListener("click", () => {
         }
     }
     else
-        alert("Il faut au moins 2 joueurs...");
+        document.getElementById("error").style.opacity = 1;
 });
