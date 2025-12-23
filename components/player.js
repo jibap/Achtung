@@ -32,7 +32,7 @@ export class Player {
         this.head = document.createElement("div");
         this.head.setAttribute("class", "head");
         this.head.setAttribute("id", name + "Head");
-        document.getElementById("canvas-container").appendChild(this.head);
+        document.getElementById("fullscreen-container").appendChild(this.head);
     }
     die() {
         this.alive = false;

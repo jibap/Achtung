@@ -16,7 +16,7 @@ export class Achtung {
         document.querySelectorAll(".bonus, .head").forEach((elm) => elm.remove());
         document.getElementById("Startmenu").hidden = true;
         document.getElementById("pauseMenu").style.opacity = "0";
-        document.getElementById("canvas-container").style.display = "block";
+        document.getElementById("fullscreen-container").style.display = "block";
         let ctx = canvas.getContext("2d");
         // initialisation des subdivisions du jeu
         this.canvasManager = new CanvasManager(canvas, this);

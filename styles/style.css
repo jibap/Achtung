@@ -294,17 +294,17 @@ body {
     opacity: .3;
 }
 
-#canvas-container {
+#fullscreen-container {
     position: relative;
     display: none;
 }
 
-#canvas-container canvas {
+#fullscreen-container canvas {
     border: 3px solid #ff0;
     float: left;
 }
 
-#canvas-container canvas.openWalls {
+#fullscreen-container canvas.openWalls {
     border: none;
     background: url("data:image/svg+xml, <svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%'><rect x='0' y='0' width='100%' height='100%' fill='none' stroke='yellow' stroke-width='5' stroke-dasharray='10 10'/></svg>") no-repeat;
 }
@@ -328,15 +328,11 @@ body {
     opacity: .8;
     align-content: center;
     padding: 0 50px;
-}
-
-#victor {
-    margin: 0;
     text-align: center;
     font-size: 5vw;
 }
 
-#canvas-container .head {
+#fullscreen-container .head {
     width: 10px;
     height: 10px;
     position: absolute;
@@ -344,36 +340,34 @@ body {
     border-radius: 100%
 }
 
-#canvas-container .head.permuted {
+#fullscreen-container .head.permuted {
     background: blue
 }
 
-#canvas-container .head.squared {
+#fullscreen-container .head.squared {
     border-radius: 0%
 }
 
-#canvas-container .head.pulseHead {
+#fullscreen-container .head.pulseHead {
     animation: pulseHead .2s linear infinite alternate
 }
 
 #pauseMenu {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
     pointer-events: none;
     opacity: 0;
-    background: rgba(0,0,0,0.3);
-    transition: .2s
+    background: rgba(255, 255, 255, 0.3);
+    transition: .2s;
+    height: 200px;
+    top: 25%;
+    left: 25%;
+    border-radius: 50px;
+    z-index: 10;
+    align-content: center;
+    padding: 0 50px;
+    font-size: 5vw;
 }
 
-#pauseMenu h3 {
-    text-align: center;
-    margin-top: 30%;
-    font-size: 200%
-}
 
 #bg_calc {
     background: black;
@@ -383,7 +377,7 @@ body {
     transition: .5s
 }
 
-#canvas-container .bonus {
+#fullscreen-container .bonus {
     width: 50px;
     height: 50px;
     border-radius: 100%;
@@ -391,67 +385,67 @@ body {
     background-size: cover
 }
 
-#canvas-container .bonus.fasterSelf {
+#fullscreen-container .bonus.fasterSelf {
     background-image: url(../bonus/fasterSelf.png)
 }
 
-#canvas-container .bonus.fasterElse {
+#fullscreen-container .bonus.fasterElse {
     background-image: url(../bonus/fasterElse.png)
 }
 
-#canvas-container .bonus.fatter {
+#fullscreen-container .bonus.fatter {
     background-image: url(../bonus/fatter.png)
 }
 
-#canvas-container .bonus.slimmer {
+#fullscreen-container .bonus.slimmer {
     background-image: url(../bonus/slimmer.png)
 }
 
-#canvas-container .bonus.invincible {
+#fullscreen-container .bonus.invincible {
     background-image: url(../bonus/invincible.png)
 }
 
-#canvas-container .bonus.invert {
+#fullscreen-container .bonus.invert {
     background-image: url(../bonus/invert.png)
 }
 
-#canvas-container .bonus.random {
+#fullscreen-container .bonus.random {
     background-image: url(../bonus/random.png)
 }
 
-#canvas-container .bonus.addBonus {
+#fullscreen-container .bonus.addBonus {
     background-image: url(../bonus/addBonus.png)
 }
 
-#canvas-container .bonus.slowerElse {
+#fullscreen-container .bonus.slowerElse {
     background-image: url(../bonus/slowerElse.png)
 }
 
-#canvas-container .bonus.slowerSelf {
+#fullscreen-container .bonus.slowerSelf {
     background-image: url(../bonus/slowerSelf.png)
 }
 
-#canvas-container .bonus.wallSelf {
+#fullscreen-container .bonus.wallSelf {
     background-image: url(../bonus/wallSelf.png)
 }
 
-#canvas-container .bonus.walls {
+#fullscreen-container .bonus.walls {
     background-image: url(../bonus/walls.png)
 }
 
-#canvas-container .bonus.snakeSelf {
+#fullscreen-container .bonus.snakeSelf {
     background-image: url(../bonus/snakeSelf.png)
 }
 
-#canvas-container .bonus.snakeElse {
+#fullscreen-container .bonus.snakeElse {
     background-image: url(../bonus/snakeElse.png)
 }
 
-#canvas-container .bonus.colorBlind {
+#fullscreen-container .bonus.colorBlind {
     background-image: url(../bonus/colorBlind.png)
 }
 
-#canvas-container .bonus.changeBg {
+#fullscreen-container .bonus.changeBg {
     background-image: url(../bonus/changeBg.png)
 }
 

@@ -106,7 +106,7 @@ document.addEventListener("fullscreenchange", () => {
 });
 
 function return2StartMenu(){
-    document.getElementById("canvas-container").style.display = "none";
+    document.getElementById("fullscreen-container").style.display = "none";
         document.getElementById("Startmenu").style.display = "block";
         if (achtung != undefined)
             achtung === null || achtung === void 0 ? void 0 : achtung.destroy();
@@ -205,7 +205,7 @@ document.getElementById("Go").addEventListener("click", () => {
     document.querySelectorAll('.keyLeft, .keyRight').forEach(k => k.classList.remove('focused'));
     if (document.querySelectorAll(".selected").length > 1) {
         try {
-            document.getElementById("canvas-container").requestFullscreen().then(() => {
+            document.getElementById("fullscreen-container").requestFullscreen().then(() => {
                 achtung = new Achtung(settings, document.getElementById("canvas"));
                 selectedContainer = undefined;
             });

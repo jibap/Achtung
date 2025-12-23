@@ -8,7 +8,7 @@ export class Bonus {
         this.element.setAttribute("class", effect + " bonus");
         this.bonusManager = bonusManager;
         this.bonusManager.bonuses.push(this);
-        document.getElementById("canvas-container").appendChild(this.element);
+        document.getElementById("fullscreen-container").appendChild(this.element);
         this.x = getRandom(this.element.clientWidth / 2, this.bonusManager.game.canvasManager.width() - this.element.clientWidth / 2);
         this.y = getRandom(this.element.clientHeight / 2, this.bonusManager.game.canvasManager.height() - this.element.clientHeight / 2);
         this.activated = false;
