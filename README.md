@@ -10,3 +10,7 @@ Fork de la version revisitée par <a href="https://github.com/BarthPaleologue/Ac
 * taille paramétrable de la zone de jeu
 * modification des noms des joueurs pour mieux s'y retrouver dans le tableau de scores
 * petites amélioration esthétiques ;-)
+
+<img width="1914" height="876" alt="image" src="https://github.com/user-attachments/assets/b0ae3dc9-506e-4478-a395-2374bc6e75ed" />
+
+
