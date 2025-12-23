@@ -215,5 +215,5 @@ document.getElementById("Go").addEventListener("click", () => {
         }
     }
     else
-        alert("Il faut quand même 2 joueurs...");
+        alert("Il faut au moins 2 joueurs...");
 });
