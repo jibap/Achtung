@@ -19,7 +19,7 @@ export class PlayerManager {
         this.players.push(player);
         this.aliveCounter += 1;
         this.maxScore = (this.getPlayersNumber() - 1) * 10;
-        document.getElementById("highscore").innerHTML = this.maxScore + " points";
+        document.getElementById("highscore").innerHTML = this.maxScore + "&nbsp;points";
     }
     getPlayersNumber() {
         return this.players.length;

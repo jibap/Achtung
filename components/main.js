@@ -129,6 +129,7 @@ for (let bonusElement of document.querySelectorAll("#object-selector img")) {
         document.getElementById("object-selector").classList.add("disabled");
 });
 let settings = {
+    canva: 1,
     speed: 1,
     maniability: 1,
     fatness: 1,
@@ -137,6 +138,9 @@ let settings = {
     bonusFrequency: 1,
     bonusDuration: 1
 };
+let canvaSlider = new Slider("canvaSlider", document.getElementById("canvaSlider"), 20, 100, 100, (val) => {
+    settings.canva = val;
+});
 let speedSlider = new Slider("speedSlider", document.getElementById("speedSlider"), 1, 50, 10, (val) => {
     settings.speed = val / 10;
 });
@@ -160,6 +164,7 @@ let bonusDurationSlider = new Slider("bonusDurationSlider", document.getElementB
 });
 
 document.getElementById("randomize").addEventListener("click", () => {
+    canvaSlider.setValue(getRandomInt(20, 100));
     speedSlider.setValue(getRandomInt(5, 15));
     maniaSlider.setValue(getRandomInt(7, 15));
     fatSlider.setValue(getRandomInt(5, 15));
@@ -181,6 +186,7 @@ document.getElementById("randomize").addEventListener("click", () => {
         document.getElementById("objects").click();
 });
 document.getElementById("reset").addEventListener("click", () => {
+    canvaSlider.setValue(100);
     speedSlider.setValue(10);
     maniaSlider.setValue(10);
     fatSlider.setValue(10);
