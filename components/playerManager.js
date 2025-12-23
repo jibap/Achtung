@@ -44,7 +44,6 @@ export class PlayerManager {
         }
         if (this.players[0].score >= this.maxScore && this.players[0].score - this.players[1].score >= 2 && this.aliveCounter <= 1) {
             document.getElementById("victoryScreen").style.backgroundColor = this.players[0].defaultColor;
-            document.getElementById("victor").style.lineHeight = window.innerHeight + "px";
             document.getElementById("victoryScreen").style.display = "block";
             document.getElementById("victor").innerText = `${this.players[0].fullName} a gagné !`;
             this.game.gameOver = true;
