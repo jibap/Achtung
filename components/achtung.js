@@ -25,13 +25,13 @@ export class Achtung {
         this.playerManager = new PlayerManager(this);
         document.querySelectorAll(".player-container").forEach((element) => {
             if (element.getAttribute("data-selected") == "true") {
-                let keyLeft = element.querySelector(".keyLeft").getAttribute("alt");
-                let keyRight = element.querySelector(".keyRight").getAttribute("alt");
-                let color = element.getAttribute("alt");
+                let keyLeft = element.querySelector(".keyLeft").getAttribute("data-key");
+                let keyRight = element.querySelector(".keyRight").getAttribute("data-key");
+                let color = getComputedStyle(element).backgroundColor;
                 let fullName = element.querySelector(".name").innerHTML;
                 let name = element.getAttribute("id");
                 this.playerManager.addPlayer(new Player(fullName, name, getRandom(this.width / 7, this.width * (6 / 7)), getRandom(this.height / 7, this.height * (6 / 7)), Math.random() * 360, color, keyLeft, keyRight, this.playerManager));
-                document.getElementById("score").insertAdjacentHTML("beforeend",`<p id="${name}Score">${fullName} : 0</p>`);
+                document.getElementById("score").insertAdjacentHTML("beforeend",`<p>${fullName} : 0</p>`);
             }
         });
         let scoreWidth = document.getElementById("score-container").clientWidth;

@@ -78,13 +78,13 @@ document.addEventListener("keydown", e => {
     if (selectedContainer != undefined && !editingName) {
         if (settingState == 0) {
             selectedContainer.querySelector(".keyLeft").innerHTML = e.key;
-            selectedContainer.querySelector(".keyLeft").setAttribute("alt", String(e.code));
+            selectedContainer.querySelector(".keyLeft").setAttribute("data-key", String(e.code));
             selectedContainer.querySelector(".keyLeft").classList.remove('focused');
             selectedContainer.querySelector(".keyRight").classList.add('focused');
         }
         if (settingState == 1) {
             selectedContainer.querySelector(".keyRight").innerHTML = e.key;
-            selectedContainer.querySelector(".keyRight").setAttribute("alt", String(e.code));
+            selectedContainer.querySelector(".keyRight").setAttribute("data-key", String(e.code));
             selectedContainer.setAttribute("data-selected", "true");
             selectedContainer.classList.add("selected");
             selectedContainer.querySelector(".keyLeft").classList.add('focused');

@@ -38,7 +38,7 @@ export class PlayerManager {
         this.sortPlayersByScore();
         for (let player of this.players) {
             let scoreElement = document.createElement("p");
-            scoreElement.setAttribute("id", player.name + "Score");
+            scoreElement.style.color = player.color;
             scoreElement.innerText = `${player.fullName} : ${player.score}`;
             (_a = document.getElementById("score")) === null || _a === void 0 ? void 0 : _a.appendChild(scoreElement);
         }
@@ -46,7 +46,7 @@ export class PlayerManager {
             document.getElementById("victoryScreen").style.backgroundColor = this.players[0].defaultColor;
             document.getElementById("victor").style.lineHeight = window.innerHeight + "px";
             document.getElementById("victoryScreen").style.display = "block";
-            document.getElementById("victor").innerText = `${this.players[0].id} a gagné !`;
+            document.getElementById("victor").innerText = `${this.players[0].fullName} a gagné !`;
             this.game.gameOver = true;
         }
     }
