@@ -47,6 +47,6 @@ export class CanvasManager {
                 this.cells[i][j].path = [];
             }
         }
-        this.canvas.classList.remove("pulseWalls");
+        this.canvas.classList.remove("openWalls");
     }
 }

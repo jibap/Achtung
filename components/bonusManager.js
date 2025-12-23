@@ -91,7 +91,7 @@ export class BonusManager {
         }
     }
     toggleWalls(breaking, permanent) {
-        this.game.canvasManager.ctx.canvas.classList.toggle("pulseWalls", breaking);
+        this.game.canvasManager.ctx.canvas.classList.toggle("openWalls", breaking);
         for (let player of this.game.playerManager.players) {
             player.wallBreaker = breaking;
         }
