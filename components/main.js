@@ -196,6 +196,7 @@ document.getElementById("reset").addEventListener("click", () => {
         document.getElementById("objects").click();
 });
 document.getElementById("Go").addEventListener("click", () => {
+    document.querySelectorAll('.keyLeft, .keyRight').forEach(k => k.classList.remove('focused'));
     if (document.querySelectorAll(".selected").length > 1) {
         try {
             document.getElementById("canvas-container").requestFullscreen().then(() => {
