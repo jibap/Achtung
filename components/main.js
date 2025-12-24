@@ -26,13 +26,19 @@ document.querySelectorAll('.player-container').forEach(playerLine => {
         }
         }, 250);
     });
-
+    // RESET PlayerLine 
     playerLine.addEventListener("contextmenu", e => {
         e.preventDefault();
         playerLine.setAttribute("data-selected", "false");
         playerLine.classList.remove("selected");
-        playerLine.querySelector(".keyRight").innerHTML = "Droite";
-        playerLine.querySelector(".keyLeft").innerHTML = "Gauche";
+        const kLeft = selectedContainer.querySelector(".keyLeft");
+        const kRight = selectedContainer.querySelector(".keyRight");
+        kRight.innerHTML = "Droite";
+        kLeft.innerHTML = "Gauche";
+        kRight.classList.remove("focused", "exists");
+        kLeft.classList.remove("focused", "exists");
+        kLeft.setAttribute("data-key","");
+        kRight.setAttribute("data-key","");
     });
 
     playerLine.addEventListener('dblclick', () => {
