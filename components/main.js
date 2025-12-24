@@ -77,28 +77,41 @@ document.querySelectorAll('.player-container').forEach(playerLine => {
 
 document.addEventListener("keydown", e => {
     if (selectedContainer != undefined && !editingName) {
+        let abort = false;
+        // Vérifie si la touche est déjà prise
+        document.querySelectorAll('.keyLeft, .keyRight').forEach(el => {
+            const key = el.dataset.key;
+            el.classList.remove("exists");
+            if (key && !el.classList.contains('focused') && key === e.code) {
+                el.classList.toggle("exists");
+                abort = true;
+            }
+        });
+        
+        if (abort) return;
+
+        const kLeft = selectedContainer.querySelector(".keyLeft");
+        const kRight = selectedContainer.querySelector(".keyRight");
         if (settingState == 0) {
-            selectedContainer.querySelector(".keyLeft").innerHTML = e.key;
-            selectedContainer.querySelector(".keyLeft").setAttribute("data-key", String(e.code));
-            selectedContainer.querySelector(".keyLeft").classList.remove('focused');
-            selectedContainer.querySelector(".keyRight").classList.add('focused');
+            kLeft.innerHTML = e.key;
+            kLeft.setAttribute("data-key", String(e.code));
+            kLeft.classList.remove('focused');
+            kRight.classList.add('focused');
         }
         if (settingState == 1) {
-            selectedContainer.querySelector(".keyRight").innerHTML = e.key;
-            selectedContainer.querySelector(".keyRight").setAttribute("data-key", String(e.code));
+            kRight.innerHTML = e.key;
+            kRight.setAttribute("data-key", String(e.code));
             selectedContainer.setAttribute("data-selected", "true");
             selectedContainer.classList.add("selected");
-            selectedContainer.querySelector(".keyLeft").classList.add('focused');
-            selectedContainer.querySelector(".keyRight").classList.remove('focused');
+            kLeft.classList.add('focused');
+            kRight.classList.remove('focused');
         }
-        if (settingState >= 1)
-            settingState = 0;
-        else
-            settingState += 1;
+        settingState = (settingState >= 1) ? 0 : settingState + 1;
     }
     if (e.key === "Escape") { // esc
         return2StartMenu();
     }
+    
 });
 document.addEventListener("fullscreenchange", () => {
     if (!document.fullscreenElement) {

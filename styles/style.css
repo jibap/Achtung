@@ -96,10 +96,18 @@ body {
     border-radius: 5px;
     padding: 5px 10px;
 }
+
+#playerList .player-container:has(p.focused) {
+    opacity: .8!important;
+}
 #playerList .player-container .focused {
     border: 1px dashed blue;
     background-color: white;
     color: blue;
+}
+
+#playerList .player-container .exists {
+    animation: pulseHead .2s linear infinite alternate
 }
 
 #playerList .player-container.selected {
