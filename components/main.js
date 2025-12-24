@@ -164,33 +164,33 @@ let canvaSlider = new Slider("canvaSlider", document.getElementById("canvaSlider
 let speedSlider = new Slider("speedSlider", document.getElementById("speedSlider"), 1, 50, 10, (val) => {
     settings.speed = val / 10;
 });
-let maniaSlider = new Slider("maniaSlider", document.getElementById("maniaSlider"), 1, 20, 10, (val) => {
+let maniabilitySlider = new Slider("maniabilitySlider", document.getElementById("maniabilitySlider"), 1, 20, 10, (val) => {
     settings.maniability = val / 10;
 });
-let fatSlider = new Slider("fatSlider", document.getElementById("fatSlider"), 1, 50, 10, (val) => {
+let fatnessSlider = new Slider("fatnessSlider", document.getElementById("fatnessSlider"), 1, 50, 10, (val) => {
     settings.fatness = val / 10;
 });
-let trouSlider = new Slider("trouSlider", document.getElementById("trouSlider"), 0, 100, 10, (val) => {
+let holeLengthSlider = new Slider("holeLengthSlider", document.getElementById("holeLengthSlider"), 0, 100, 10, (val) => {
     settings.holeLength = val / 10;
 });
-let bonusSlider = new Slider("bonusSlider", document.getElementById("bonusSlider"), 1, 20, 10, (val) => {
+let bonusEffectsSlider = new Slider("bonusEffectsSlider", document.getElementById("bonusEffectsSlider"), 1, 20, 10, (val) => {
     settings.bonusEffects = val / 10;
 });
-let bonusFreqSlider = new Slider("bonusFreqSlider", document.getElementById("bonusFreqSlider"), 1, 60, 10, (val) => {
+let bonusFrequencySlider = new Slider("bonusFrequencySlider", document.getElementById("bonusFrequencySlider"), 1, 60, 10, (val) => {
     settings.bonusFrequency = val / 10;
 });
 let bonusDurationSlider = new Slider("bonusDurationSlider", document.getElementById("bonusDurationSlider"), 1, 20, 10, (val) => {
     settings.bonusDuration = val / 10;
 });
-
+// Random settings
 document.getElementById("randomize").addEventListener("click", () => {
     canvaSlider.setValue(getRandomInt(20, 100));
     speedSlider.setValue(getRandomInt(5, 15));
-    maniaSlider.setValue(getRandomInt(7, 15));
-    fatSlider.setValue(getRandomInt(5, 15));
-    trouSlider.setValue(getRandomInt(8, 30));
-    bonusSlider.setValue(getRandomInt(5, 15));
-    bonusFreqSlider.setValue(getRandomInt(7, 40));
+    maniabilitySlider.setValue(getRandomInt(7, 15));
+    fatnessSlider.setValue(getRandomInt(5, 15));
+    holeLengthSlider.setValue(getRandomInt(8, 30));
+    bonusEffectsSlider.setValue(getRandomInt(5, 15));
+    bonusFrequencySlider.setValue(getRandomInt(7, 40));
     bonusDurationSlider.setValue(getRandomInt(5, 15));
     for (let bonusElement of document.querySelectorAll("#object-selector img")) {
         if (randomBool(20)) {
@@ -205,14 +205,15 @@ document.getElementById("randomize").addEventListener("click", () => {
     if ((randomBool(5) && areBonusEnabled) || (randomBool(80) && !areBonusEnabled))
         document.getElementById("objects").click();
 });
+// RESET Bonus
 document.getElementById("reset").addEventListener("click", () => {
     canvaSlider.setValue(100);
     speedSlider.setValue(10);
-    maniaSlider.setValue(10);
-    fatSlider.setValue(10);
-    trouSlider.setValue(10);
-    bonusSlider.setValue(10);
-    bonusFreqSlider.setValue(10);
+    maniabilitySlider.setValue(10);
+    fatnessSlider.setValue(10);
+    holeLengthSlider.setValue(10);
+    bonusEffectsSlider.setValue(10);
+    bonusFrequencySlider.setValue(10);
     bonusDurationSlider.setValue(10);
     for (let bonusElement of document.querySelectorAll("#object-selector img")) {
         bonusElement.classList.remove("disabled");
@@ -221,6 +222,46 @@ document.getElementById("reset").addEventListener("click", () => {
     if (!areBonusEnabled)
         document.getElementById("objects").click();
 });
+
+document.querySelectorAll(".resetSlider").forEach(button => {
+    button.addEventListener("click", (el) => {
+        
+        // récupère le div slider à l'intérieur
+        const sliders = {
+            canvaSlider: canvaSlider,
+            speedSlider: speedSlider,
+            maniabilitySlider: maniabilitySlider,
+            fatnessSlider: fatnessSlider,
+            holeLengthSlider: holeLengthSlider,
+            bonusEffectsSlider: bonusEffectsSlider,
+            bonusFrequencySlider: bonusFrequencySlider,
+            bonusDurationSlider: bonusDurationSlider
+        };
+
+        const defaultValues = {
+            canvaSlider: 100,
+            speedSlider: 10,
+            maniabilitySlider: 10,
+            fatnessSlider: 10,
+            holeLengthSlider: 10,
+            bonusEffectsSlider: 10,
+            bonusFrequencySlider: 10,
+            bonusDurationSlider: 10
+        };
+                
+        const container = el.target.parentElement; 
+        const settingName = container.querySelector(".slider").id; 
+        const slider = sliders[settingName];
+
+        const defaultValue = defaultValues[settingName];
+        if (slider && defaultValue !== undefined) {
+            slider.setValue(defaultValue);
+            settings[settingName.replace("Slider","")] = defaultValue; // si settings utilise les noms courts
+        }
+    });
+});
+
+// Achtung !
 document.getElementById("Go").addEventListener("click", () => {
     document.querySelectorAll('.keyLeft, .keyRight').forEach(k => k.classList.remove('focused'));
     if (document.querySelectorAll(".selected").length > 1) {

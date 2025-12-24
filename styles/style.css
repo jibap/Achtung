@@ -206,7 +206,12 @@ body {
 
 #sliders .slider {
     display: inline-block;
-    width: calc(100% - 220px);
+    width: calc(100% - 230px);
+}
+
+#sliders .resetSlider {
+    display: inline-block;
+    cursor: pointer;
 }
 
 #bonus{
