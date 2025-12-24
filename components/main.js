@@ -37,8 +37,8 @@ document.querySelectorAll('.player-container').forEach(playerLine => {
         kLeft.innerHTML = "Gauche";
         kRight.classList.remove("focused", "exists");
         kLeft.classList.remove("focused", "exists");
-        kLeft.setAttribute("data-key","");
-        kRight.setAttribute("data-key","");
+        kLeft.removeAttribute("data-key");
+        kRight.removeAttribute("data-key");
     });
 
     playerLine.addEventListener('dblclick', () => {
