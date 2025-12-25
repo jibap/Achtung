@@ -159,7 +159,7 @@ let settings = {
     bonusDuration: 1
 };
 let canvaSlider = new Slider("canvaSlider", document.getElementById("canvaSlider"), 20, 100, 100, (val) => {
-    settings.canva = val;
+    settings.canva = val / 10;
 });
 let speedSlider = new Slider("speedSlider", document.getElementById("speedSlider"), 1, 50, 10, (val) => {
     settings.speed = val / 10;
@@ -256,7 +256,7 @@ document.querySelectorAll(".resetSlider").forEach(button => {
         const defaultValue = defaultValues[settingName];
         if (slider && defaultValue !== undefined) {
             slider.setValue(defaultValue);
-            settings[settingName.replace("Slider","")] = defaultValue; // si settings utilise les noms courts
+            settings[settingName.replace("Slider","")] = defaultValue / 10; // si settings utilise les noms courts
         }
     });
 });

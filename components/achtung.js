@@ -36,7 +36,7 @@ export class Achtung {
         });
         let scoreWidth = document.getElementById("score-container").clientWidth;
         let maxWidth = screen.width - scoreWidth - 20;
-        ctx.canvas.width = maxWidth * (settings.canva / 100);
+        ctx.canvas.width = maxWidth * (settings.canva / 10);
         ctx.canvas.height = screen.height - 20;
         ctx.globalCompositeOperation = "source-over";
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // le fond du canvas
