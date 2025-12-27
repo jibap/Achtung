@@ -57,6 +57,9 @@ body {
 #Startmenu > div > *{
     overflow: auto;
     width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 
@@ -119,21 +122,22 @@ body {
     justify-content: center;
 }
 
-#Go > div {
+#Go > button {
     height: 15vw !important;
     width: 15vw !important;
-    background: black;
+    background-color: black;
     border: 5px solid cyan;
     margin: 0;
     font-size: 3vw;
     cursor: pointer;
     border-radius: 100%;
     text-align: center;
-    line-height: 15vw;
+    line-height: 14vw;
     overflow: hidden !important;
+    color: white;
 }
 
-#Go > div:hover {
+#Go > button:hover {
     background-color: midnightblue;
 }
 
@@ -167,6 +171,7 @@ body {
 #settings{
     width: 300px;
     height: calc(100vh - 100px);
+    align-items: stretch!important;
 }
 
 #buttons{

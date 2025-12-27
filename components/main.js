@@ -1,9 +1,10 @@
 var _a;
-//@ts-ignore
+
 Math.seedrandom(Math.random().toString(36).substring(7)); // aléatoire procédural
 import { Slider } from "./external/slider.js";
 import { Achtung } from "./achtung.js";
 import { randomBool, getRandomInt } from "./external/tools.js";
+
 /// Selection des personnages et des touches
 let achtung;
 let settingState = 0;
@@ -17,7 +18,6 @@ document.querySelectorAll('.player-container').forEach(playerLine => {
        // on attend 250ms pour confirmer que ce n'est pas un double-clic
         clickTimer = setTimeout(() => {
         if (!editingName) {
-            document.getElementById("error").style.opacity = 0;
             document.querySelectorAll('.keyLeft, .keyRight').forEach(k => k.classList.remove('focused'));
             selectedContainer = playerLine;
             settingState = 0;
@@ -127,9 +127,9 @@ document.addEventListener("fullscreenchange", () => {
 
 function return2StartMenu(){
     document.getElementById("fullscreen-container").style.display = "none";
-        document.getElementById("Startmenu").style.display = "block";
-        if (achtung != undefined)
-            achtung === null || achtung === void 0 ? void 0 : achtung.destroy();
+    document.getElementById("Startmenu").style.display = "block";
+    if (achtung != undefined)
+        achtung === null || achtung === void 0 ? void 0 : achtung.destroy();
 } 
 // actions de la souris sur les bonus
 for (let bonusElement of document.querySelectorAll("#object-selector img")) {
@@ -261,20 +261,35 @@ document.querySelectorAll(".resetSlider").forEach(button => {
     });
 });
 
+const errorMsg = document.getElementById("error");
+
 // Achtung !
-document.getElementById("Go").addEventListener("click", () => {
+document.getElementById("GoBtn").addEventListener("click", (e) => {
+    e.stopPropagation(); // empêche le clic de remonter au document et de cacher l'erreur
+
     document.querySelectorAll('.keyLeft, .keyRight').forEach(k => k.classList.remove('focused'));
+
     if (document.querySelectorAll(".selected").length > 1) {
         try {
             document.getElementById("fullscreen-container").requestFullscreen().then(() => {
                 achtung = new Achtung(settings, document.getElementById("canvas"));
                 selectedContainer = undefined;
             });
-        }
-        catch (e) {
+        } catch (e) {
             alert("Votre navigateur ne supporte pas la fonction requestFullScreen. Mettez le à jour ou Goulag.\n" + e);
         }
+    } else {
+        errorMsg.style.opacity = 1;
+
+        // on masque l'erreur si l'utilisateur clique n'importe où après
+        const hideError = (evt) => {
+            if (!evt.target.closest("#GoBtn")) {
+                errorMsg.style.opacity = 0;
+                document.removeEventListener("click", hideError);
+            }
+        };
+        document.addEventListener("click", hideError);
     }
-    else
-        document.getElementById("error").style.opacity = 1;
 });
+
+
