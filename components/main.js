@@ -11,6 +11,34 @@ let settingState = 0;
 let selectedContainer;
 let editingName = false;
 
+
+const SETTINGS_CONFIG = {
+    canva: { min: 20, max: 100, default: 100 },
+    speed: { min: 1, max: 50, default: 10 },
+    maniability: { min: 1, max: 20, default: 10 },
+    fatness: { min: 1, max: 50, default: 10 },
+    holeLength: { min: 0, max: 100, default: 10 },
+    bonusEffects: { min: 1, max: 20, default: 10 },
+    bonusFrequency: { min: 1, max: 60, default: 10 },
+    bonusDuration: { min: 1, max: 20, default: 10 }
+};
+
+const sliders = {};
+const settings = {};
+
+for (const [key, cfg] of Object.entries(SETTINGS_CONFIG)) {
+    sliders[key] = new Slider(
+        key + "Slider",
+        document.getElementById(key + "Slider"),
+        cfg.min,
+        cfg.max,
+        cfg.default,
+        (val) => {
+            settings[key] = Number(val) / 10;
+        }
+    );
+}
+
 document.querySelectorAll('.player-container').forEach(playerLine => {
     let clickTimer;
 
@@ -148,50 +176,13 @@ for (let bonusElement of document.querySelectorAll("#object-selector img")) {
     else
         document.getElementById("object-selector").classList.add("disabled");
 });
-let settings = {
-    canva: 1,
-    speed: 1,
-    maniability: 1,
-    fatness: 1,
-    holeLength: 1,
-    bonusEffects: 1,
-    bonusFrequency: 1,
-    bonusDuration: 1
-};
-let canvaSlider = new Slider("canvaSlider", document.getElementById("canvaSlider"), 20, 100, 100, (val) => {
-    settings.canva = val / 10;
-});
-let speedSlider = new Slider("speedSlider", document.getElementById("speedSlider"), 1, 50, 10, (val) => {
-    settings.speed = val / 10;
-});
-let maniabilitySlider = new Slider("maniabilitySlider", document.getElementById("maniabilitySlider"), 1, 20, 10, (val) => {
-    settings.maniability = val / 10;
-});
-let fatnessSlider = new Slider("fatnessSlider", document.getElementById("fatnessSlider"), 1, 50, 10, (val) => {
-    settings.fatness = val / 10;
-});
-let holeLengthSlider = new Slider("holeLengthSlider", document.getElementById("holeLengthSlider"), 0, 100, 10, (val) => {
-    settings.holeLength = val / 10;
-});
-let bonusEffectsSlider = new Slider("bonusEffectsSlider", document.getElementById("bonusEffectsSlider"), 1, 20, 10, (val) => {
-    settings.bonusEffects = val / 10;
-});
-let bonusFrequencySlider = new Slider("bonusFrequencySlider", document.getElementById("bonusFrequencySlider"), 1, 60, 10, (val) => {
-    settings.bonusFrequency = val / 10;
-});
-let bonusDurationSlider = new Slider("bonusDurationSlider", document.getElementById("bonusDurationSlider"), 1, 20, 10, (val) => {
-    settings.bonusDuration = val / 10;
-});
+
 // Random settings
 document.getElementById("randomize").addEventListener("click", () => {
-    canvaSlider.setValue(getRandomInt(20, 100));
-    speedSlider.setValue(getRandomInt(5, 15));
-    maniabilitySlider.setValue(getRandomInt(7, 15));
-    fatnessSlider.setValue(getRandomInt(5, 15));
-    holeLengthSlider.setValue(getRandomInt(8, 30));
-    bonusEffectsSlider.setValue(getRandomInt(5, 15));
-    bonusFrequencySlider.setValue(getRandomInt(7, 40));
-    bonusDurationSlider.setValue(getRandomInt(5, 15));
+    for (const [key, cfg] of Object.entries(SETTINGS_CONFIG)) {
+        const randomValue = getRandomInt(cfg.min, cfg.max);
+        sliders[key].setValue(randomValue);
+    }
     for (let bonusElement of document.querySelectorAll("#object-selector img")) {
         if (randomBool(20)) {
             bonusElement.classList.toggle("disabled");
@@ -205,16 +196,12 @@ document.getElementById("randomize").addEventListener("click", () => {
     if ((randomBool(5) && areBonusEnabled) || (randomBool(80) && !areBonusEnabled))
         document.getElementById("objects").click();
 });
+
 // RESET Bonus
 document.getElementById("reset").addEventListener("click", () => {
-    canvaSlider.setValue(100);
-    speedSlider.setValue(10);
-    maniabilitySlider.setValue(10);
-    fatnessSlider.setValue(10);
-    holeLengthSlider.setValue(10);
-    bonusEffectsSlider.setValue(10);
-    bonusFrequencySlider.setValue(10);
-    bonusDurationSlider.setValue(10);
+    for (const [key, cfg] of Object.entries(SETTINGS_CONFIG)) {
+        sliders[key].setValue(cfg.default);
+    }
     for (let bonusElement of document.querySelectorAll("#object-selector img")) {
         bonusElement.classList.remove("disabled");
     }
@@ -224,40 +211,15 @@ document.getElementById("reset").addEventListener("click", () => {
 });
 
 document.querySelectorAll(".resetSlider").forEach(button => {
-    button.addEventListener("click", (el) => {
-        
-        // récupère le div slider à l'intérieur
-        const sliders = {
-            canvaSlider: canvaSlider,
-            speedSlider: speedSlider,
-            maniabilitySlider: maniabilitySlider,
-            fatnessSlider: fatnessSlider,
-            holeLengthSlider: holeLengthSlider,
-            bonusEffectsSlider: bonusEffectsSlider,
-            bonusFrequencySlider: bonusFrequencySlider,
-            bonusDurationSlider: bonusDurationSlider
-        };
+    button.addEventListener("click", (e) => {
+        const container = e.target.parentElement;
+        const sliderId = container.querySelector(".slider").id;
+        const key = sliderId.replace("Slider", "");
 
-        const defaultValues = {
-            canvaSlider: 100,
-            speedSlider: 10,
-            maniabilitySlider: 10,
-            fatnessSlider: 10,
-            holeLengthSlider: 10,
-            bonusEffectsSlider: 10,
-            bonusFrequencySlider: 10,
-            bonusDurationSlider: 10
-        };
-                
-        const container = el.target.parentElement; 
-        const settingName = container.querySelector(".slider").id; 
-        const slider = sliders[settingName];
+        const cfg = SETTINGS_CONFIG[key];
+        if (!cfg) return;
 
-        const defaultValue = defaultValues[settingName];
-        if (slider && defaultValue !== undefined) {
-            slider.setValue(defaultValue);
-            settings[settingName.replace("Slider","")] = defaultValue / 10; // si settings utilise les noms courts
-        }
+        sliders[key].setValue(cfg.default);
     });
 });
 
