@@ -45,11 +45,13 @@ export class Achtung {
         document.getElementById("bg_calc").style.width = this.width + "px";
         document.getElementById("bg_calc").style.height = this.height + "px";
         this.bonusManager = new BonusManager(this);
-        document.querySelectorAll("#object-selector img").forEach((element) => {
-            if (element.getAttribute("data-selected") == "true" && document.getElementById("objects").checked) {
-                this.bonusManager.addEffect(element.getAttribute("id"));
-            }
-        });
+        if (settings.bonus) {
+            Object.keys(settings.bonus).forEach(bonusId => {
+                if (settings.bonus[bonusId]) {
+                    this.bonusManager.addEffect(bonusId);
+                }
+            });
+        }
         // initialisation du clavier
         this.keyboard = {};
         window.addEventListener('keydown', e => this.keyboard[e.code] = true);

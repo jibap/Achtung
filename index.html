@@ -134,7 +134,7 @@
                     <p id="randomize">Random all !</p>
                     <p id="reset">Reset all !</p>
                 </div>
-                <div id="sliders">
+                <div class="sliders">
                     <div>
                         <p>Taille de la zone</p>
                         <div class="slider" id="canvaSlider"></div>
@@ -160,79 +160,49 @@
                         <div class="slider" id="holeLengthSlider"></div>
                         <b class="resetSlider">↺</b>
                     </div>
-                    <div>
-                        <p>Puissance des bonus</p>
-                        <div class="slider" id="bonusEffectsSlider"></div>
-                        <b class="resetSlider">↺</b>
-                    </div>
-                    <div>
-                        <p>Fréquence des bonus</p>
-                        <div class="slider" id="bonusFrequencySlider"></div>
-                        <b class="resetSlider">↺</b>
-                    </div>
-                    <div>
-                        <p>Durée des bonus</p>
-                        <div class="slider" id="bonusDurationSlider"></div>
-                        <b class="resetSlider">↺</b>
-                    </div>
                 </div>
                 <div id="bonus">
                     <div class="checkboxContainer">
-                    <label for="objects">Activer les Bonus</label>
-                    <input name="objects" id="objects" type="checkbox" checked />
-                    <label for="objects" id="objectsLabel"></label>
+                        <label for="bonusSwitch">Activer les Bonus</label>
+                        <input name="bonusSwitch" id="bonusSwitch" type="checkbox" checked />
+                        <label for="bonusSwitch" id="bonusSwitchLabel"></label>
                     </div>
-                    <div id="object-selector">
-                        <img
-                            src="bonus/fasterSelf.png"
-                            id="fasterSelf"
-                            data-selected="true"
-                            title="Accélérateur"
-                        />
-                        <img
-                            src="bonus/fasterElse.png"
-                            id="fasterElse"
-                            data-selected="true"
-                            title="Accélérateur"
-                        />
-                        <img src="bonus/fatter.png" id="fatter" data-selected="true" 
-                            title="Elargisseur"/>
-                        <img src="bonus/slimmer.png" id="slimmer" data-selected="true" 
-                            title="Elargisseur"/>
-                        <img
-                            src="bonus/invincible.png"
-                            id="invincible"
-                            data-selected="true"
-                            title="Invincible"
-                        />
+                    <div id="bonus-selector">
+                        <img src="bonus/fasterSelf.png" id="fasterSelf" data-selected="true" title="Accélérateur" />
+                        <img src="bonus/fasterElse.png" id="fasterElse" data-selected="true" title="Accélérateur" />
+                        <img src="bonus/fatter.png" id="fatter" data-selected="true" title="Elargisseur"/>
+                        <img src="bonus/slimmer.png" id="slimmer" data-selected="true" title="Elargisseur"/>
+                        <img src="bonus/invincible.png" id="invincible" data-selected="true" title="Invincible" />
                         <img src="bonus/random.png" id="random" data-selected="true" title="Aléatoire"/>
                         <img src="bonus/addBonus.png" id="addBonus" data-selected="true" title="Ajoute des bonus"/>
                         <img src="bonus/invert.png" id="invert" data-selected="true" title="Inverse la direction"/>
-                        <img
-                            src="bonus/slowerElse.png"
-                            id="slowerElse"
-                            data-selected="true"
-                            title="Ralentisseur"
-                        />
-                        <img
-                            src="bonus/slowerSelf.png"
-                            id="slowerSelf"
-                            data-selected="true"
-                            title="Ralentisseur"
-                        />
+                        <img src="bonus/slowerElse.png" id="slowerElse" data-selected="true" title="Ralentisseur" />
+                        <img src="bonus/slowerSelf.png" id="slowerSelf" data-selected="true" title="Ralentisseur" />
                         <img src="bonus/snakeSelf.png" id="snakeSelf" data-selected="true" title="Direction à angle droit" />
                         <img src="bonus/snakeElse.png" id="snakeElse" data-selected="true" title="Direction à angle droit"/>
                         <img src="bonus/wallSelf.png" id="wallSelf" data-selected="true" title="Pas de bordure"/>
                         <img src="bonus/walls.png" id="walls" data-selected="true" title="Aucune bordure"/>
-                        <img
-                            src="bonus/colorBlind.png"
-                            id="colorBlind"
-                            data-selected="true"
-                            title="Change la couleur des serpents"
-                        />
+                        <img src="bonus/colorBlind.png" id="colorBlind" data-selected="true" title="Change la couleur des serpents" />
                         <img src="bonus/changeBg.png" id="changeBg" data-selected="true" title="Change la couleur de fond" />
-                        <div style="width: 100%; display: flex; justify-content: space-evenly;">
-                            <span style="color: green;">Pour soi</span> / <span style="color: red;">Pour les autres</span>/ <span style="color: blue;">Pour tous</span>
+                        <div style="width: 100%; display: flex; justify-content: space-evenly; padding-bottom: 20px;">
+                            <span id="bonusSelf" style="color: green;cursor: pointer;">Pour soi</span> / <span id="bonusOthers" style="color: red;cursor: pointer;">Pour les autres</span>/ <span id="bonusAll" style="color: blue;cursor: pointer;">Pour tous</span>
+                        </div>
+                    </div>
+                    <div class="sliders">
+                        <div>
+                            <p>Puissance des bonus</p>
+                            <div class="slider" id="bonusEffectsSlider"></div>
+                            <b class="resetSlider">↺</b>
+                        </div>
+                        <div>
+                            <p>Fréquence des bonus</p>
+                            <div class="slider" id="bonusFrequencySlider"></div>
+                            <b class="resetSlider">↺</b>
+                        </div>
+                        <div>
+                            <p>Durée des bonus</p>
+                            <div class="slider" id="bonusDurationSlider"></div>
+                            <b class="resetSlider">↺</b>
                         </div>
                     </div>
                 </div>

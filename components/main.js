@@ -23,8 +23,20 @@ const SETTINGS_CONFIG = {
     bonusDuration: { min: 1, max: 20, default: 10 }
 };
 
+const BONUS_CATEGORIES = {
+    self : ["fasterSelf", "slowerSelf", "snakeSelf", "wallSelf", "slimmer", "invincible"],
+    others : ["fasterElse", "slowerElse", "snakeElse", "changeBg", "colorBlind", "invert", "fatter"],
+    all : ["addBonus", "random", "walls"]
+}
+
 const sliders = {};
 const settings = {};
+
+// INIT BONUS
+settings.bonus = {};
+document.querySelectorAll("#bonus-selector img").forEach(bonusElement => {
+    settings.bonus[bonusElement.getAttribute("id")] = true;
+});
 
 for (const [key, cfg] of Object.entries(SETTINGS_CONFIG)) {
     sliders[key] = new Slider(
@@ -159,22 +171,48 @@ function return2StartMenu(){
     if (achtung != undefined)
         achtung === null || achtung === void 0 ? void 0 : achtung.destroy();
 } 
+
 // actions de la souris sur les bonus
-for (let bonusElement of document.querySelectorAll("#object-selector img")) {
-    bonusElement.addEventListener("click", () => {
-        bonusElement.classList.toggle("disabled");
-        if (bonusElement.getAttribute("class") == "disabled")
-            bonusElement.setAttribute("data-selected", "false");
-        else
-            bonusElement.setAttribute("data-selected", "true");
+Object.keys(settings.bonus).forEach(bonusId => {
+    document.getElementById(bonusId).addEventListener("click", (e) => {
+        settings.bonus[bonusId] = !settings.bonus[bonusId];
+        e.target.classList.toggle("disabled", !settings.bonus[bonusId]);
+    });
+});
+
+// Activation/Désactivation globale des bonus par catégorie
+document.getElementById("bonusSelf").addEventListener("click", (e) => {
+    toggleBonusCategory("self", e);
+});
+document.getElementById("bonusOthers").addEventListener("click", (e) => {
+    toggleBonusCategory("others", e);
+});
+document.getElementById("bonusAll").addEventListener("click", (e) => {
+    toggleBonusCategory("all", e);
+});
+
+function toggleBonusCategory(category, e) {
+    const isActive = e.target.classList.toggle("disabled");
+    Object.keys(settings.bonus).forEach(bonusId => {
+        if (BONUS_CATEGORIES[category].includes(bonusId)) {
+            settings.bonus[bonusId] = !isActive;
+            document.getElementById(bonusId).classList.toggle("disabled", !settings.bonus[bonusId]);
+        }
     });
 }
-(_a = document.getElementById("objects")) === null || _a === void 0 ? void 0 : _a.addEventListener("change", () => {
-    if (document.getElementById("object-selector").classList.contains("disabled")) {
-        document.getElementById("object-selector").classList.remove("disabled");
-    }
-    else
-        document.getElementById("object-selector").classList.add("disabled");
+
+// Activation/Désactivation globale des bonus
+(_a = document.getElementById("bonusSwitch")) === null || _a === void 0 ? void 0 : _a.addEventListener("change", () => {
+    const bonusContainer = document.getElementById("bonus-selector");
+    const areEnabled = document.getElementById("bonusSwitch").checked;
+    
+    bonusContainer.classList.toggle("disabled", !areEnabled);
+
+    // Change tous les bonus
+    Object.keys(settings.bonus).forEach(bonusId => {
+        settings.bonus[bonusId] = areEnabled;
+        document.getElementById(bonusId).classList.toggle("disabled", !areEnabled);
+    });
 });
 
 // Random settings
@@ -183,18 +221,14 @@ document.getElementById("randomize").addEventListener("click", () => {
         const randomValue = getRandomInt(cfg.min, cfg.max);
         sliders[key].setValue(randomValue);
     }
-    for (let bonusElement of document.querySelectorAll("#object-selector img")) {
-        if (randomBool(20)) {
-            bonusElement.classList.toggle("disabled");
-            if (bonusElement.getAttribute("class") == "disabled")
-                bonusElement.setAttribute("data-selected", "false");
-            else
-                bonusElement.setAttribute("data-selected", "true");
-        }
-    }
-    let areBonusEnabled = document.getElementById("objects").checked;
+    Object.keys(settings.bonus).forEach(bonusId => {
+        const isEnabled = randomBool(20);
+        settings.bonus[bonusId] = isEnabled;
+        document.getElementById(bonusId).classList.toggle("disabled", !isEnabled);
+    });
+    let areBonusEnabled = document.getElementById("bonusSwitch").checked;
     if ((randomBool(5) && areBonusEnabled) || (randomBool(80) && !areBonusEnabled))
-        document.getElementById("objects").click();
+        document.getElementById("bonusSwitch").click();
 });
 
 // RESET Bonus
@@ -202,12 +236,15 @@ document.getElementById("reset").addEventListener("click", () => {
     for (const [key, cfg] of Object.entries(SETTINGS_CONFIG)) {
         sliders[key].setValue(cfg.default);
     }
-    for (let bonusElement of document.querySelectorAll("#object-selector img")) {
-        bonusElement.classList.remove("disabled");
-    }
-    let areBonusEnabled = document.getElementById("objects").checked;
+
+    Object.keys(settings.bonus).forEach(bonusId => {
+        settings.bonus[bonusId] = true;
+        document.getElementById(bonusId).classList.remove("disabled");
+    });
+
+    let areBonusEnabled = document.getElementById("bonusSwitch").checked;
     if (!areBonusEnabled)
-        document.getElementById("objects").click();
+        document.getElementById("bonusSwitch").click();
 });
 
 document.querySelectorAll(".resetSlider").forEach(button => {
