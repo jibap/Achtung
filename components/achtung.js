@@ -86,7 +86,7 @@ export class Achtung {
         this.I += 1;
         this.playerManager.refreshScore();
         this.playerManager.aliveCounter = 0;
-        if (this.I % Math.round(bonusBaseIterationFrequency / this.settings.bonusFrequency) == 0 && document.getElementById("objects").checked)
+        if (this.I % Math.round(bonusBaseIterationFrequency / this.settings.bonusFrequency) == 0)
             this.bonusManager.spawnBonus(1);
         this.playerManager.updatePlayers();
         if (this.playerManager.aliveCounter <= 1) { // fin de la manche
