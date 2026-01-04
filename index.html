@@ -162,11 +162,8 @@
                     </div>
                 </div>
                 <div id="bonus">
-                    <div class="checkboxContainer">
-                        <label for="bonusSwitch">Activer les Bonus</label>
-                        <input name="bonusSwitch" id="bonusSwitch" type="checkbox" checked />
-                        <label for="bonusSwitch" id="bonusSwitchLabel"></label>
-                    </div>
+                    <label class="checkboxContainer" for="bonusSwitch">Activer les Bonus <input name="bonusSwitch" id="bonusSwitch" type="checkbox" checked /></label>
+                    
                     <div id="bonus-selector">
                         <img src="bonus/fasterSelf.png" id="fasterSelf" data-selected="true" title="Accélérateur" />
                         <img src="bonus/fasterElse.png" id="fasterElse" data-selected="true" title="Accélérateur" />
@@ -184,8 +181,10 @@
                         <img src="bonus/walls.png" id="walls" data-selected="true" title="Aucune bordure"/>
                         <img src="bonus/colorBlind.png" id="colorBlind" data-selected="true" title="Change la couleur des serpents" />
                         <img src="bonus/changeBg.png" id="changeBg" data-selected="true" title="Change la couleur de fond" />
-                        <div style="width: 100%; display: flex; justify-content: space-evenly; padding-bottom: 20px;">
-                            <span id="bonusSelf" style="color: green;cursor: pointer;">Pour soi</span> / <span id="bonusOthers" style="color: red;cursor: pointer;">Pour les autres</span>/ <span id="bonusAll" style="color: blue;cursor: pointer;">Pour tous</span>
+                        <div id="bonus-cat-btn">
+                            <span id="bonus-self">Pour soi</span>
+                            <span id="bonus-others">Pour les autres</span>
+                            <span id="bonus-all">Pour tous</span>
                         </div>
                     </div>
                     <div class="sliders">

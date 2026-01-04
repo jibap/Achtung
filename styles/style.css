@@ -358,64 +358,26 @@ body {
     flex-direction: column;
 }
 #bonus .checkboxContainer {
-    display: grid;
-    grid-template-columns: auto 50px;
+    display: flex;
     background: purple;
     border-radius: 3px;
     width: 24vw;
     z-index: 2;
     margin-top: -25px;
-    justify-content: space-around;
+    line-height: 50px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 10px;
 }
 
 #bonus .checkboxContainer:hover {
     background: midnightblue
 }
 
-#bonus .checkboxContainer label:first-of-type {
-    line-height: 50px;
-    padding-left: 20px;
-    cursor: pointer
-}
-
-#bonus .checkboxContainer input[type=checkbox] {
-    position: absolute;
-    z-index: -1000;
-    left: -1000px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    width: 1px;
-    margin: -1px;
-    padding: 0;
-    border: 0
-}
-
-#bonus .checkboxContainer input[type=checkbox]+label {
-    padding-left: 25px;
+#bonus input[type=checkbox] {
     height: 25px;
-    border-radius: 3px;
-    display: inline-block;
-    margin: 12.5px;
-    line-height: 25px;
-    background-repeat: no-repeat;
-    background-position: 0 0;
-    font-size: 25px;
-    vertical-align: middle;
-    cursor: pointer
-}
-
-#bonus .checkboxContainer input[type=checkbox]:checked+label {
-    background-position: 0 -25px
-}
-
-#bonus .checkboxContainer input[type=checkbox]+label {
-    background-image: url(../checkbox.png);
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none
+    width: 25px;
 }
 
 #bonus-selector {
@@ -439,12 +401,45 @@ body {
     border-radius: 100%;
 }
 
-#bonus-selector img.disabled {
+#bonus-selector .disabled {
     opacity: .3;
 }
 
 #bonus-selector.disabled span, #bonus-selector.disabled + .sliders{
     opacity: .3;
+}
+
+#bonus-cat-btn{
+    width: 100%; 
+    display: flex; 
+    justify-content: space-evenly; 
+    padding: 20px 0 10px;
+}
+
+#bonus-self{
+    color: yellow;
+    cursor: pointer;
+    border: 1px solid #04ff04;
+    padding: 8px;
+    border-radius: 15px;
+    background: radial-gradient(green, black);
+}
+
+#bonus-others{
+    color: yellow;
+    cursor: pointer;
+    border: 1px solid red;
+    padding: 8px;
+    border-radius: 15px;
+    background: radial-gradient(red, black);
+}
+#bonus-all{
+    color: yellow;
+    cursor: pointer;
+    border: 1px solid blue;
+    padding: 8px;
+    border-radius: 15px;
+    background: radial-gradient(blue, black);
 }
 
 

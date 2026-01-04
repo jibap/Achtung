@@ -181,13 +181,13 @@ Object.keys(settings.bonus).forEach(bonusId => {
 });
 
 // Activation/Désactivation globale des bonus par catégorie
-document.getElementById("bonusSelf").addEventListener("click", (e) => {
+document.getElementById("bonus-self").addEventListener("click", (e) => {
     toggleBonusCategory("self", e);
 });
-document.getElementById("bonusOthers").addEventListener("click", (e) => {
+document.getElementById("bonus-others").addEventListener("click", (e) => {
     toggleBonusCategory("others", e);
 });
-document.getElementById("bonusAll").addEventListener("click", (e) => {
+document.getElementById("bonus-all").addEventListener("click", (e) => {
     toggleBonusCategory("all", e);
 });
 
@@ -212,6 +212,10 @@ function toggleBonusCategory(category, e) {
     Object.keys(settings.bonus).forEach(bonusId => {
         settings.bonus[bonusId] = areEnabled;
         document.getElementById(bonusId).classList.toggle("disabled", !areEnabled);
+    });
+    // Change les boutons de catégories
+    document.getElementById("bonus-cat-btn").querySelectorAll("span").forEach(btn => {
+        btn.classList.toggle("disabled", !areEnabled);
     });
 });
 
@@ -240,6 +244,9 @@ document.getElementById("reset").addEventListener("click", () => {
     Object.keys(settings.bonus).forEach(bonusId => {
         settings.bonus[bonusId] = true;
         document.getElementById(bonusId).classList.remove("disabled");
+    });
+    document.getElementById("bonus-cat-btn").querySelectorAll("span").forEach(btn => {
+        btn.classList.toggle("disabled", false);
     });
 
     let areBonusEnabled = document.getElementById("bonusSwitch").checked;
