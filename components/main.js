@@ -14,13 +14,13 @@ let editingName = false;
 
 const SETTINGS_CONFIG = {
     canva: { min: 20, max: 100, default: 100 },
-    speed: { min: 1, max: 50, default: 10 },
-    maniability: { min: 1, max: 20, default: 10 },
-    fatness: { min: 1, max: 50, default: 10 },
+    speed: { min: 1, max: 30, default: 10 },
+    maniability: { min: 5, max: 20, default: 10 },
+    fatness: { min: 2, max: 50, default: 10 },
     holeLength: { min: 0, max: 100, default: 10 },
-    bonusEffects: { min: 1, max: 20, default: 10 },
+    bonusEffects: { min: 10, max: 15, default: 10 },
     bonusFrequency: { min: 1, max: 60, default: 10 },
-    bonusDuration: { min: 1, max: 20, default: 10 }
+    bonusDuration: { min: 3, max: 20, default: 10 }
 };
 
 const BONUS_CATEGORIES = {
