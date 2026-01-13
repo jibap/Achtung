@@ -267,6 +267,7 @@ body {
 .sliders .resetSlider {
     display: inline-block;
     cursor: pointer;
+    font-size:25px;
 }
 
 .range-slider {
